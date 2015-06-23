@@ -18,6 +18,9 @@ PSQL_EDITOR='vim -c"setf sql"'
 CLICOLOR=1
 LSCOLORS=gxgxcxdxbxegedabagacad
 
+# Some useful commands
+alias extdocs="cd ~/Documents/extdocs && source bin/activate"
+
 export VISUAL EDITOR LESS RI PSQL_EDITOR CLICOLOR LSCOLORS
 
 if [ -t 1 ]; then
