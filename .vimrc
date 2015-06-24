@@ -7,7 +7,15 @@
 
 set nocompatible
 filetype off
-set rtp+=.vim/bundle/Vundle.vim
+
+" Set vundle location. This changes a bit based on whether we're in the
+" dotfiles directory or not.
+if getcwd() == '/Users/maxdelgiudice/dotfiles'
+   set rtp+=.vim/bundle/Vundle.vim
+else
+   set rtp+=~/.vim/bundle/Vundle.vim
+endif
+
 call vundle#begin()
 
 " Plugins
