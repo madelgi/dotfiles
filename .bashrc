@@ -1,8 +1,9 @@
-# ~/.bashrc
-# vim:set ft=sh sw=2 sts=2:
+###############################################################################
+# A bashrc for the ages
+#
+###############################################################################
 
-# add functions here
-source "$HOME/.sharedrc"
+# vim:set ft=sh sw=2 sts=2:
 
 # {{{ env variables
 
@@ -12,6 +13,8 @@ export HISTSIZE=10000
 export HISTCONTROL=erasedups
 # Append to history file
 shopt -s histappend
+
+export HISTIGNORE="%*"
 
 # what happens when you invoke an editor via bash (w/ C-x or C-e). The visual/editor
 # distinction isn't really important anymore.
@@ -97,14 +100,15 @@ fi
 
 # }}}
 
-export HISTIGNORE="%*"
+# {{{ Misc configs
 
+# TODO wut
 [ -z "$PS1" ] || stty -ixon
 
-[ -z "$PS1" ] || export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\w\[\033[00m\]\$(git_prompt_info '(%s)')$ "
-
+# git auto-completion
 if [ -f '/usr/local/etc/bash_completion.d/git-completion.bash' ]; then
   source '/usr/local/etc/bash_completion.d/git-completion.bash'
 fi
 
 [ ! -f "$HOME/.bashrc.local" ] || . "$HOME/.bashrc.local"
+# }}}
