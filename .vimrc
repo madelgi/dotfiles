@@ -13,7 +13,9 @@ call vundle#begin()
 " Plugins
 Plugin 'gmarik/Vundle.vim'
 Plugin 'Shougo/vimproc.vim'
-Plugin 'eagletmt/ghcmod-vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'klen/python-mode'
+Plugin 'easymotion/vim-easymotion'
 
 " End vundle
 call vundle#end()
