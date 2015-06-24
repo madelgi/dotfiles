@@ -1,3 +1,26 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" A ~*~Beautiful~*~ vimrc file
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"{{{ Vundle/Plugins
+
+set nocompatible
+filetype off
+set rtp+=.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Plugins
+Plugin 'gmarik/Vundle.vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'eagletmt/ghcmod-vim'
+
+" End vundle
+call vundle#end()
+filetype plugin indent on
+
+" }}}
+
 "{{{Auto Commands
 
 " Automatically cd into the directory that the file is in
@@ -272,6 +295,7 @@ let Tlist_Exit_OnlyWindow = 1
 let Tlist_Use_SingleClick = 1
 let Tlist_Inc_Winwidth = 0
 "}}}
+
 
 let g:rct_completion_use_fri = 1
 "let g:Tex_DefaultTargetFormat = "pdf"
