@@ -216,6 +216,9 @@ endfunction
 
 "{{{ Mappings
 
+" For navigating buffers
+nnoremap <silent> gn :bn<CR>
+
 " Open Url on this line with the browser \w
 map <Leader>w :call Browser ()<CR>
 

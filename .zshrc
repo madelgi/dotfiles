@@ -35,14 +35,13 @@ zstyle ':completion:*' cache-path ~/.zshcache
 
 # }}}
 
-# make with the pretty colors
-autoload colors; colors
+# options
+setopt extendedglob
+
+# {{{ Bindings
 
 # just say no to zle vim mode:
 bindkey -e
-
-# options
-setopt appendhistory autocd extendedglob histignoredups nonomatch prompt_subst interactivecomments
 
 # Bindings
 # external editor support
@@ -55,29 +54,23 @@ bindkey '\ep' up-line-or-search
 bindkey '\en' down-line-or-search
 bindkey '\ew' kill-region
 
-if [ -z "$TMUX" ]; then
-  fg-widget() {
-    stty icanon echo pendin -inlcr < /dev/tty
-    stty discard '^O' dsusp '^Y' lnext '^V' quit '^\' susp '^Z' < /dev/tty
-    zle reset-prompt
-    if jobs %- >/dev/null 2>&1; then
-      fg %-
-    else
-      fg
-    fi
-  }
+# }}}
 
-  zle -N fg-widget
-  bindkey -M emacs "^Z" fg-widget
-  bindkey -M vicmd "^Z" fg-widget
-  bindkey -M viins "^Z" fg-widget
-fi
+# {{{ Prompt
+
+# make with the pretty colors
+autoload colors; colors
+
+# turn on command substitution in the prompt
+setopt prompt_subst
 
 # prompt
 PROMPT='%{$fg_bold[green]%}%n@%m%{$reset_color%}:%{$fg_bold[cyan]%}%~%{$reset_color%}# '
 
 # show non-success exit code in right prompt
 RPROMPT="%(?..{%{$fg[red]%}%?%{$reset_color%}})"
+
+# }}}
 
 # {{{ History
 
@@ -100,6 +93,9 @@ setopt HIST_REDUCE_BLANKS
 
 # Add a command's beginning timestamp and the duration to the history file
 setopt EXTENDED_HISTORY
+
+# Ignore duplicated commands in history
+setopt HIST_IGNORE_DUPS
 
 # }}}
 
@@ -124,6 +120,11 @@ alias ..='cd ..'
 
 # set cd autocompletion to commonly visited directories
 cdpath=(~ ~/Projects ~/Programming)
+
+# various misc options
+setopt interactivecomments
+setopt autocd
+setopt nomatch
 
 # import local zsh customizations, if present
 zrcl="$HOME/.zshrc.local"
