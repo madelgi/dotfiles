@@ -1,11 +1,10 @@
 fpath=(
   $fpath
-  ~/.rvm/scripts/zsh/Completion
   ~/.zsh/functions
   /usr/local/share/zsh/site-functions
 )
 
-source "$HOME/.sharedrc"
+# {{{ Exports
 
 # color term
 export CLICOLOR=1
@@ -14,8 +13,12 @@ export ZLS_COLORS=$LSCOLORS
 export LC_CTYPE=en_US.UTF-8
 export LESS=FRX
 
+# }}}
+
 # make with the nice completion
 autoload -U compinit; compinit
+
+# {{{ Completions
 
 # Completion for kill-like commands
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
@@ -29,6 +32,8 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zshcache
+
+# }}}
 
 # make with the pretty colors
 autoload colors; colors
@@ -69,22 +74,41 @@ if [ -z "$TMUX" ]; then
 fi
 
 # prompt
-PROMPT='%{$fg_bold[green]%}%n@%m%{$reset_color%}:%{$fg_bold[cyan]%}%~%{$reset_color%}$(git_prompt_info "(%s)")%# '
+PROMPT='%{$fg_bold[green]%}%n@%m%{$reset_color%}:%{$fg_bold[cyan]%}%~%{$reset_color%}# '
 
 # show non-success exit code in right prompt
 RPROMPT="%(?..{%{$fg[red]%}%?%{$reset_color%}})"
 
-# history
+# {{{ History
+
+# history file location
 HISTFILE=~/.zsh_history
-HISTSIZE=5000
+
+# Save a lot of history
+HISTSIZE=10000
 SAVEHIST=10000
+
+# zsh sessions append history to the end of the history file, rather than rewrite.
 setopt APPEND_HISTORY
+
+# add new lines to the history incrementally, rather than waiting for a zsh session to
+# end.
 setopt INC_APPEND_HISTORY
+
+# Remove unnecessary whitespace from commands before adding to history list
+setopt HIST_REDUCE_BLANKS
+
+# Add a command's beginning timestamp and the duration to the history file
+setopt EXTENDED_HISTORY
+
+# }}}
 
 # default apps
 (( ${+PAGER}   )) || export PAGER='less'
 (( ${+EDITOR}  )) || export EDITOR='vim'
 export PSQL_EDITOR='vim -c"setf sql"'
+
+# {{{ Aliases
 
 # aliases
 alias ll="ls -l"
@@ -95,20 +119,11 @@ alias md='mkdir -p'
 alias rd='rmdir'
 alias cd..='cd ..'
 alias ..='cd ..'
-alias groutes='rake routes | grep $@'
+
+# }}}
 
 # set cd autocompletion to commonly visited directories
-cdpath=(~ ~/src $DEV_DIR $HASHROCKET_DIR)
-
-# rvm-install added line:
-if [[ -s "$HOME/.rvm/scripts/rvm" ]] ; then source "$HOME/.rvm/scripts/rvm" ; fi
-
-cuke() {
-  local file="$1"
-  shift
-  cucumber "features/$(basename $file)" $@
-}
-compctl -g '*.feature' -W features cuke
+cdpath=(~ ~/Projects ~/Programming)
 
 # import local zsh customizations, if present
 zrcl="$HOME/.zshrc.local"
