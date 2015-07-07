@@ -1,3 +1,10 @@
+################################################################################
+# |
+# | My zshrc config
+# |
+################################################################################
+
+# function locations
 fpath=(
   $fpath
   ~/.zsh/functions
@@ -13,12 +20,17 @@ export ZLS_COLORS=$LSCOLORS
 export LC_CTYPE=en_US.UTF-8
 export LESS=FRX
 
+# default apps
+(( ${+PAGER}   )) || export PAGER='less'
+(( ${+EDITOR}  )) || export EDITOR='vim'
+export PSQL_EDITOR='vim -c"setf sql"'
+
 # }}}
+
+# {{{ Completions
 
 # make with the nice completion
 autoload -U compinit; compinit
-
-# {{{ Completions
 
 # Completion for kill-like commands
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
@@ -34,9 +46,6 @@ zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zshcache
 
 # }}}
-
-# options
-setopt extendedglob
 
 # {{{ Bindings
 
@@ -60,13 +69,13 @@ bindkey '\ew' kill-region
 
 # make with the pretty colors
 autoload colors; colors
+autoload -Uz vcs_info
 
 # turn on command substitution in the prompt
 setopt prompt_subst
 
 # prompt
-PROMPT='%{$fg_bold[green]%}%n@%m%{$reset_color%}:%{$fg_bold[cyan]%}%~%{$reset_color%}# '
-
+PROMPT='%{$fg_bold[green]%}%n@%m%f:%{$fg_bold[cyan]%}%~%{$reset_color%} '
 # show non-success exit code in right prompt
 RPROMPT="%(?..{%{$fg[red]%}%?%{$reset_color%}})"
 
@@ -99,16 +108,11 @@ setopt HIST_IGNORE_DUPS
 
 # }}}
 
-# default apps
-(( ${+PAGER}   )) || export PAGER='less'
-(( ${+EDITOR}  )) || export EDITOR='vim'
-export PSQL_EDITOR='vim -c"setf sql"'
-
 # {{{ Aliases
 
-# aliases
-alias ll="ls -l"
-alias la="ls -a"
+# Convenient ls shortcuts
+alias ll='ls -l'
+alias la='ls -a'
 alias l.='ls -ld .[^.]*'
 alias lsd='ls -ld *(-/DN)'
 alias md='mkdir -p'
@@ -116,7 +120,16 @@ alias rd='rmdir'
 alias cd..='cd ..'
 alias ..='cd ..'
 
+# Work-related shortcuts
+alias site='cd ~/Projects/maxdelgiudice'
+alias extdocs='cd ~/Documents/extdocs && source bin/activate'
+alias engdocs='cd ~/Documents/docs && source bin/activate'
+alias open-eng='open -a "Google Chrome" /Users/maxdelgiudice/Documents/docs/_build/html/index.html'
+alias open-ext='open -a "Google Chrome" /Users/maxdelgiudice/Documents/extdocs/_build/html/index.html'
+
 # }}}
+
+# {{{ Misc options
 
 # set cd autocompletion to commonly visited directories
 cdpath=(~ ~/Projects ~/Programming)
@@ -124,7 +137,8 @@ cdpath=(~ ~/Projects ~/Programming)
 # various misc options
 setopt interactivecomments
 setopt autocd
-setopt nomatch
+setopt nonomatch
+setopt extendedglob
 
 # import local zsh customizations, if present
 zrcl="$HOME/.zshrc.local"
@@ -132,3 +146,5 @@ zrcl="$HOME/.zshrc.local"
 
 # remove duplicates in $PATH
 typeset -aU path
+
+# }}}
