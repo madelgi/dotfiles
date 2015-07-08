@@ -24,6 +24,7 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'klen/python-mode'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'dag/vim2hs'
 
 " End vundle
 call vundle#end()
