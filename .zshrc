@@ -11,6 +11,9 @@ fpath=(
   /usr/local/share/zsh/site-functions
 )
 
+# things i use in bash and zsh
+source .common
+
 # {{{ Exports
 
 # color term
@@ -132,7 +135,8 @@ alias open-ext='open -a "Google Chrome" /Users/maxdelgiudice/Documents/extdocs/_
 # {{{ Misc options
 
 # set cd autocompletion to commonly visited directories
-cdpath=(~ ~/Projects ~/Programming)
+cdpath=(~ ~/Projects ~/Programming ~/Documents/)
+export cdpath
 
 # various misc options
 setopt interactivecomments
