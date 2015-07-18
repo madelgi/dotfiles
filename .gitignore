@@ -4,3 +4,4 @@ FILES
 .screenrc
 .tmux.conf
 .ctags
+*.swp
