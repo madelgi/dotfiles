@@ -25,6 +25,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'klen/python-mode'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'dag/vim2hs'
+Plugin 'eagletmt/ghcmod-vim'
+Plugin 'eagletmt/neco-ghc'
 
 " End vundle
 call vundle#end()
@@ -308,6 +310,8 @@ let Tlist_Use_SingleClick = 1
 let Tlist_Inc_Winwidth = 0
 "}}}
 
+" enable pretty syntax stuff for haskell
+let g:haskell_conceal_wide=1
 
 let g:rct_completion_use_fri = 1
 "let g:Tex_DefaultTargetFormat = "pdf"

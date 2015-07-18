@@ -1,3 +1,6 @@
 FILES
 .vim/bundle
 .netrwhist
+.screenrc
+.tmux.conf
+.ctags

@@ -1,6 +1,3 @@
-
-
-
 # bc memorizing unix extraction commands is hard work
 extract () {
    if [ -f $1 ] ; then
