@@ -77,10 +77,38 @@ autoload -Uz vcs_info
 # turn on command substitution in the prompt
 setopt prompt_subst
 
+# Collapse home dir to ~
+function get_pwd() {
+  echo "${PWD/$HOME/~}"
+}
+
 # prompt
-PROMPT='%{$fg_bold[green]%}%n@%m%f:%{$fg_bold[cyan]%}%~%{$reset_color%} '
-# show non-success exit code in right prompt
-RPROMPT="%(?..{%{$fg[red]%}%?%{$reset_color%}})"
+PROMPT='
+%{$fg_bold[green]%}%n@%m%f: %{$fg_bold[cyan]%}$(get_pwd)
+$reset_color→ '
+
+zstyle ':vcs_info:*' actionformats \
+    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
+zstyle ':vcs_info:*' formats       \
+    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
+zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
+
+zstyle ':vcs_info:*' enable git cvs svn
+
+# or use pre_cmd, see man zshcontrib
+vcs_info_wrapper() {
+  vcs_info
+  if [ -n "$vcs_info_msg_0_" ]; then
+    echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
+  fi
+}
+
+RPROMPT=$'$(vcs_info_wrapper)'
+
+
+# show non-success exit code in right prompt. Now doing vcs info instead
+# RPROMPT="%(?..{%{$fg[red]%}%?%{$reset_color%}})"
+
 
 # }}}
 
@@ -152,3 +180,8 @@ zrcl="$HOME/.zshrc.local"
 typeset -aU path
 
 # }}}
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+export PATH="$PATH:$HOME/.rvm/bin"                              # Add RVM to PATH for scripting
+export PATH="$PATH:/usr/local/Cellar/maven30/3.0.5/libexec/bin" # add mvn to path
+export UA_REPOS_PATH="/Users/maxdelgiudice/Projects/UA"            # Add UA directory to path

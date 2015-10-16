@@ -90,3 +90,5 @@ fi
 
 [ ! -f "$HOME/.bashrc.local" ] || . "$HOME/.bashrc.local"
 # }}}
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

@@ -27,6 +27,7 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'dag/vim2hs'
 Plugin 'eagletmt/ghcmod-vim'
 Plugin 'eagletmt/neco-ghc'
+Plugin 'derekwyatt/vim-scala'
 
 " End vundle
 call vundle#end()
