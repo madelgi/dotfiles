@@ -12,7 +12,7 @@ fpath=(
 )
 
 # things i use in bash and zsh
-source .common
+source ~/.common
 
 # {{{ Exports
 
@@ -150,6 +150,11 @@ alias md='mkdir -p'
 alias rd='rmdir'
 alias cd..='cd ..'
 alias ..='cd ..'
+
+# Viewing pdfs in chrome
+cpdf() {
+    open -a "Google Chrome" $1
+}
 
 # Work-related shortcuts
 alias site='cd ~/Projects/maxdelgiudice'

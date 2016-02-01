@@ -4,6 +4,8 @@
     ci = commit
     co = checkout
     cp = cherry-pick
+    up = !"f () { git add -u; git commit --amend; git push -f; }; f"
+    ac = !"f () { git add -u; git commit -m $1; }; f"
     put = push origin HEAD
     doff = reset head^
     ri = rebase --interactive
@@ -42,7 +44,7 @@
     untracked = cyan
 
 [core]
-    excludesfile = ~/.cvsignore
+	excludesfile = ~/.gitignore
     editor = vim
     whitespace = warn
 
@@ -69,3 +71,5 @@
 
 [credential]
     helper = osxkeychain
+[rerere]
+	enabled = true

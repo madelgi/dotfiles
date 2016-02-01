@@ -3,7 +3,6 @@
 #
 ###############################################################################
 
-export PATH="$HOME/Library/Haskell/bin:$PATH"
 source .common
 
 # vim:set ft=sh sw=2 sts=2:
@@ -92,3 +91,4 @@ fi
 # }}}
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+export PATH="$PATH:$HOME/Library/Haskell/bin" # add haskell shit to path

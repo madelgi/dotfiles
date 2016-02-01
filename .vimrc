@@ -22,16 +22,38 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
 Plugin 'klen/python-mode'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'dag/vim2hs'
 Plugin 'eagletmt/ghcmod-vim'
 Plugin 'eagletmt/neco-ghc'
 Plugin 'derekwyatt/vim-scala'
+Plugin 'mbbill/code_complete'
+Plugin 'vim-scripts/cscope.vim'
+Plugin 'Latex-Box-Team/Latex-Box'  " Latex compiling shi
+Plugin 'junegunn/goyo.vim' " Distraction free writing
+
 
 " End vundle
 call vundle#end()
 filetype plugin indent on
+
+" }}}
+
+" {{{ Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+" Make syntastic passive
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 
 " }}}
 
@@ -259,6 +281,9 @@ set pastetoggle=<F10>
 
 " Edit vimrc \ev
 nnoremap <silent> <Leader>ev :tabnew<CR>:e ~/.vimrc<CR>
+
+" C code completion
+let g:completekey = "<tab>"
 
 " Edit gvimrc \gv
 nnoremap <silent> <Leader>gv :tabnew<CR>:e ~/.gvimrc<CR>

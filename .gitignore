@@ -5,3 +5,4 @@ FILES
 .tmux.conf
 .ctags
 *.swp
+.ssh/*
