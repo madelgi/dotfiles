@@ -20,6 +20,20 @@ extract () {
    fi
  }
 
+py_project () {
+    # create dir structure
+    mkdir $1; cd $1
+    cp -rf ~/.skeletons/python/* .
+    mv PROJECT $1
+    mv bin/PROJECT bin/$1
+    # replace placeholder text
+    sed -i -e "s/PROJECT/$1/g" $1/test/test_main.py
+    sed -i -e "s/PROJECT/$1/g" setup.py
+    # clean up
+    find . -name "*.swp" -type f -delete
+    find . -name "*.py-e" -type f -delete
+}
+
 # Takes a number of directies to go up, e.g. up 4 == cd ../../../..
 up () {
   local d=""
