@@ -31,9 +31,9 @@ Plugin 'eagletmt/neco-ghc'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'mbbill/code_complete'
 Plugin 'vim-scripts/cscope.vim'
-Plugin 'Latex-Box-Team/Latex-Box'  " Latex compiling shi
-Plugin 'junegunn/goyo.vim' " Distraction free writing
-
+Plugin 'Latex-Box-Team/Latex-Box'   " Latex compiling shi
+Plugin 'junegunn/goyo.vim'          " Distraction free writing
+Plugin 'motus/pig.vim'              " Pig syntax highlighting
 
 " End vundle
 call vundle#end()
