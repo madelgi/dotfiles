@@ -72,3 +72,9 @@ function ghc-pkg-reset() {
         echo 'erasing ~/.cabal/lib'; rm -rf ~/.cabal/lib; \
         )
 }
+
+# ssh into a designated ua node
+uassh() {
+    sshstr="ssh madelgi@$1.prod.urbanairship.com"
+    eval $sshstr
+}

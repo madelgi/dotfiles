@@ -2,7 +2,9 @@ FILES
 .vim/bundle
 .netrwhist
 .screenrc
+.configvars
 .tmux.conf
 .ctags
 *.swp
 .ssh/*
+functions/

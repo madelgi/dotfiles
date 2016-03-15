@@ -14,6 +14,9 @@ fpath=(
 # things i use in bash and zsh
 source ~/.common
 
+# secret variables n stuff
+source ~/.configvars
+
 # {{{ Exports
 
 # color term
