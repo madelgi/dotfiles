@@ -154,6 +154,12 @@ alias rd='rmdir'
 alias cd..='cd ..'
 alias ..='cd ..'
 
+
+# purty colors
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+
 # Viewing pdfs in chrome
 cpdf() {
     open -a "Google Chrome" $1
@@ -187,9 +193,20 @@ zrcl="$HOME/.zshrc.local"
 # remove duplicates in $PATH
 typeset -aU path
 
+# pyenv settings
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
 # }}}
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-export PATH="$PATH:$HOME/.rvm/bin"                              # Add RVM to PATH for scripting
-export PATH="$PATH:/usr/local/Cellar/maven30/3.0.5/libexec/bin" # add mvn to path
-export UA_REPOS_PATH="/Users/maxdelgiudice/Projects/UA"            # Add UA directory to path
+export PATH="$PATH:$HOME/.rvm/bin"                                  # Add RVM to PATH for scripting
+export PATH="$PATH:/usr/local/Cellar/maven30/3.0.5/libexec/bin"     # add mvn to path
+
+# Work
+export UA_REPOS_PATH="/Users/maxdelgiudice/Projects/UA/web"         # Add UA web directory to path
+export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
+export CHEF_PATH=/Users/maxdelgiudice/Projects/UA/chef_configs
+export AIRSHIP_PATH=/Users/maxdelgiudice/Projects/UA/web/airship
+# export PIP_NO_INDEX=
+export PIP_INDEX_URL=https://packages.prod.urbanairship.com/pulp/python/web/pip/simple/
+export PIP_DOWNLOAD_CACHE=/tmp/pip_cache

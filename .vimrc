@@ -336,6 +336,15 @@ let Tlist_Use_SingleClick = 1
 let Tlist_Inc_Winwidth = 0
 "}}}
 
+" {{{ Templates
+:imap <buffer> ;; <C-O>/%%%<CR><C-O>c3l
+:nmap <buffer> ;; /%%%<CR>c3l
+
+:imap <buffer> ;fo <C-O>mzfor( %%%; %%%; %%%)<CR>{ // %%%<CR>%%%<CR>}<CR><C-O>'z;;
+:imap <buffer> ;prob <C-O>mz% {{{ Problem %%%<CR>\begin{problem}{\it %%%}<CR><CR>{\sc Solution}:<CR><CR>\end{problem}<CR>% }}}<CR><C-O>'z;;
+
+" }}}
+
 " enable pretty syntax stuff for haskell
 let g:haskell_conceal_wide=1
 

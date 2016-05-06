@@ -56,6 +56,10 @@ alias l='ls -CFlh'
 alias woo='fortune'
 alias lsd="ls -alF | grep /$"
 
+# purty colors
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'`
+
 # }}}
 
 # {{{ Functions
