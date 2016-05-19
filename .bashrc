@@ -92,6 +92,10 @@ if [ -f '/usr/local/etc/bash_completion.d/git-completion.bash' ]; then
 fi
 
 [ ! -f "$HOME/.bashrc.local" ] || . "$HOME/.bashrc.local"
+
+# OSX is dumb
+ulimit -n 1000000 unlimited
+
 # }}}
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

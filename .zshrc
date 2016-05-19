@@ -108,9 +108,8 @@ vcs_info_wrapper() {
 
 RPROMPT=$'$(vcs_info_wrapper)'
 
-
 # show non-success exit code in right prompt. Now doing vcs info instead
-# RPROMPT="%(?..{%{$fg[red]%}%?%{$reset_color%}})"
+RPROMPT="%(?..{%{$fg[red]%}%?%{$reset_color%}})"
 
 
 # }}}
@@ -159,6 +158,8 @@ alias ..='cd ..'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 
+# projects
+alias site='cd ~/Projects/maxdelgiudice'
 
 # Viewing pdfs in chrome
 cpdf() {
@@ -166,11 +167,11 @@ cpdf() {
 }
 
 # Work-related shortcuts
-alias site='cd ~/Projects/maxdelgiudice'
 alias extdocs='cd ~/Documents/extdocs && source bin/activate'
 alias engdocs='cd ~/Documents/docs && source bin/activate'
 alias open-eng='open -a "Google Chrome" /Users/maxdelgiudice/Documents/docs/_build/html/index.html'
 alias open-ext='open -a "Google Chrome" /Users/maxdelgiudice/Documents/extdocs/_build/html/index.html'
+alias reggie='java -jar ~/.m2/repository/com/urbanairship/reggie/1.5-SNAPSHOT/reggie-1.5-SNAPSHOT-shaded.jar'
 
 # }}}
 
@@ -196,17 +197,20 @@ typeset -aU path
 # pyenv settings
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
+# osx is dumb
+ulimit -n 1000000 unlimited
+
 # }}}
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 export PATH="$PATH:$HOME/.rvm/bin"                                  # Add RVM to PATH for scripting
 export PATH="$PATH:/usr/local/Cellar/maven30/3.0.5/libexec/bin"     # add mvn to path
-
+export PATH="$PATH:/usr/local/share/python/"                        # powerline
 # Work
 export UA_REPOS_PATH="/Users/maxdelgiudice/Projects/UA/web"         # Add UA web directory to path
 export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
 export CHEF_PATH=/Users/maxdelgiudice/Projects/UA/chef_configs
 export AIRSHIP_PATH=/Users/maxdelgiudice/Projects/UA/web/airship
 # export PIP_NO_INDEX=
-export PIP_INDEX_URL=https://packages.prod.urbanairship.com/pulp/python/web/pip/simple/
-export PIP_DOWNLOAD_CACHE=/tmp/pip_cache
+#export PIP_INDEX_URL=https://packages.prod.urbanairship.com/pulp/python/web/pip/simple/
+#export PIP_DOWNLOAD_CACHE=/tmp/pip_cache

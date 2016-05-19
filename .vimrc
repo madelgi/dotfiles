@@ -23,7 +23,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
-Plugin 'klen/python-mode'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'dag/vim2hs'
 Plugin 'eagletmt/ghcmod-vim'
@@ -34,6 +33,18 @@ Plugin 'vim-scripts/cscope.vim'
 Plugin 'Latex-Box-Team/Latex-Box'   " Latex compiling shi
 Plugin 'junegunn/goyo.vim'          " Distraction free writing
 Plugin 'motus/pig.vim'              " Pig syntax highlighting
+Plugin 'ervandew/supertab'          " Tab completion
+Plugin 'kien/ctrlp.vim'             " Great fuzzy search
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'   " vim colors
+Plugin 'tpope/vim-fugitive'         " Git integration
+
+" Python specific
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'nvie/vim-flake8'                    " Python style checker
+Plugin 'tmhedberg/SimpylFold'               " Auto fold function defs, class defs, etc
+Plugin 'vim-scripts/indentpython.vim'       " Auto indentation
+
 
 " End vundle
 call vundle#end()
@@ -50,6 +61,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
+
 
 " Make syntastic passive
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
@@ -170,7 +182,14 @@ highlight MatchParen ctermbg=4
 
 "{{{Look and Feel
 
-colors zenburn
+" colors zenburn
+
+if has('gui_running')
+  set background=dark
+  colorscheme solarized
+else
+  colorscheme zenburn
+endif
 
 "Status line gnarliness
 set laststatus=2
@@ -261,10 +280,10 @@ nnoremap <silent> <Leader>todo :execute TodoListMode()<CR>
 nnoremap <silent> <F3> :Tlist<CR>
 
 " Next Tab
-nnoremap <silent> <C-Right> :tabnext<CR>
+nnoremap <silent> <C-h> :tabnext<CR>
 
 " Previous Tab
-nnoremap <silent> <C-Left> :tabprevious<CR>
+nnoremap <silent> <C-l> :tabprevious<CR>
 
 " New Tab
 nnoremap <silent> <C-t> :tabnew<CR>
@@ -344,6 +363,9 @@ let Tlist_Inc_Winwidth = 0
 :imap <buffer> ;prob <C-O>mz% {{{ Problem %%%<CR>\begin{problem}{\it %%%}<CR><CR>{\sc Solution}:<CR><CR>\end{problem}<CR>% }}}<CR><C-O>'z;;
 
 " }}}
+
+" docstrings for folded code
+let g:SimpylFold_docstring_preview=1
 
 " enable pretty syntax stuff for haskell
 let g:haskell_conceal_wide=1
