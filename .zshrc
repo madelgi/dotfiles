@@ -1,8 +1,59 @@
-################################################################################
-# |
-# | My zshrc config
-# |
-################################################################################
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/maxdelgiudice/.oh-my-zsh
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="robbyrussell"
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
 
 # function locations
 fpath=(
@@ -80,37 +131,42 @@ autoload -Uz vcs_info
 # turn on command substitution in the prompt
 setopt prompt_subst
 
+PROMPT='
+$fg[cyan]%m: $fg[yellow]$(get_pwd)$(put_spacing)$(git_prompt_info)
+$reset_color→ '
+
 # Collapse home dir to ~
 function get_pwd() {
   echo "${PWD/$HOME/~}"
 }
 
-# prompt
-PROMPT='
-%{$fg_bold[green]%}%n@%m%f: %{$fg_bold[cyan]%}$(get_pwd)
-$reset_color→ '
-
-zstyle ':vcs_info:*' actionformats \
-    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
-zstyle ':vcs_info:*' formats       \
-    '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{5}]%f '
-zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r'
-
-zstyle ':vcs_info:*' enable git cvs svn
-
-# or use pre_cmd, see man zshcontrib
-vcs_info_wrapper() {
-  vcs_info
-  if [ -n "$vcs_info_msg_0_" ]; then
-    echo "%{$fg[grey]%}${vcs_info_msg_0_}%{$reset_color%}$del"
+function put_spacing() {
+  # Add git
+  local git=$(git_prompt_info)
+  if [ ${#git} != 0 ]; then
+    ((git=${#git} - 10))
+  else
+    git=0
   fi
+  # Compute spacing
+  local termwidth
+  (( termwidth = ${COLUMNS} - 3 - ${#HOST} - ${#$(get_pwd)} - ${git} ))
+  local spacing=""
+  for i in {1..$termwidth}; do
+    spacing="${spacing} "
+  done
+  echo $spacing
 }
 
-RPROMPT=$'$(vcs_info_wrapper)'
+function git_prompt_info() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  echo "$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_PREFIX$(current_branch)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+}
 
-# show non-success exit code in right prompt. Now doing vcs info instead
-RPROMPT="%(?..{%{$fg[red]%}%?%{$reset_color%}})"
-
+ZSH_THEME_GIT_PROMPT_PREFIX="[git:"
+ZSH_THEME_GIT_PROMPT_SUFFIX="]$reset_color"
+ZSH_THEME_GIT_PROMPT_DIRTY="$fg[red]+"
+ZSH_THEME_GIT_PROMPT_CLEAN="$fg[green]"
 
 # }}}
 
@@ -196,9 +252,6 @@ typeset -aU path
 
 # pyenv settings
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
-
-# osx is dumb
-ulimit -n 1000000 unlimited
 
 # }}}
 

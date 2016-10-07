@@ -45,6 +45,9 @@ Plugin 'nvie/vim-flake8'                    " Python style checker
 Plugin 'tmhedberg/SimpylFold'               " Auto fold function defs, class defs, etc
 Plugin 'vim-scripts/indentpython.vim'       " Auto indentation
 
+" Clojure
+Plugin 'tpope/vim-fireplace'                " REPL integration
+Plugin 'vim-scripts/paredit.vim'            " Code editing features - balanced parens, etc
 
 " End vundle
 call vundle#end()
