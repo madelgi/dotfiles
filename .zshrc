@@ -7,7 +7,7 @@ export ZSH=/Users/maxdelgiudice/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+ZSH_THEME="mfd"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -53,6 +53,8 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
+# {{{ Source content
+
 source $ZSH/oh-my-zsh.sh
 
 # function locations
@@ -67,6 +69,11 @@ source ~/.common
 
 # secret variables n stuff
 source ~/.configvars
+
+# tmuxinator stuff
+source ~/.bin/tmuxinator.zsh
+
+# }}}
 
 # {{{ Exports
 
@@ -130,43 +137,6 @@ autoload -Uz vcs_info
 
 # turn on command substitution in the prompt
 setopt prompt_subst
-
-PROMPT='
-$fg[cyan]%m: $fg[yellow]$(get_pwd)$(put_spacing)$(git_prompt_info)
-$reset_color→ '
-
-# Collapse home dir to ~
-function get_pwd() {
-  echo "${PWD/$HOME/~}"
-}
-
-function put_spacing() {
-  # Add git
-  local git=$(git_prompt_info)
-  if [ ${#git} != 0 ]; then
-    ((git=${#git} - 10))
-  else
-    git=0
-  fi
-  # Compute spacing
-  local termwidth
-  (( termwidth = ${COLUMNS} - 3 - ${#HOST} - ${#$(get_pwd)} - ${git} ))
-  local spacing=""
-  for i in {1..$termwidth}; do
-    spacing="${spacing} "
-  done
-  echo $spacing
-}
-
-function git_prompt_info() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo "$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_PREFIX$(current_branch)$ZSH_THEME_GIT_PROMPT_SUFFIX"
-}
-
-ZSH_THEME_GIT_PROMPT_PREFIX="[git:"
-ZSH_THEME_GIT_PROMPT_SUFFIX="]$reset_color"
-ZSH_THEME_GIT_PROMPT_DIRTY="$fg[red]+"
-ZSH_THEME_GIT_PROMPT_CLEAN="$fg[green]"
 
 # }}}
 
@@ -233,15 +203,11 @@ alias reggie='java -jar ~/.m2/repository/com/urbanairship/reggie/1.5-SNAPSHOT/re
 
 # {{{ Misc options
 
-# set cd autocompletion to commonly visited directories
-cdpath=(~ ~/Projects ~/Programming ~/Documents/)
-export cdpath
-
 # various misc options
-setopt interactivecomments
-setopt autocd
-setopt nonomatch
-setopt extendedglob
+setopt interactivecomments # comments in the shell
+setopt autocd              # type the name of a dir to change (no cd necessary)
+setopt nonomatch           # try to avoid the 'zsh: no matches found...'
+setopt extended_glob       # increase glob options
 
 # import local zsh customizations, if present
 zrcl="$HOME/.zshrc.local"
@@ -255,15 +221,14 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 # }}}
 
+# {{{ Path options
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-export PATH="$PATH:$HOME/.rvm/bin"                                  # Add RVM to PATH for scripting
-export PATH="$PATH:/usr/local/Cellar/maven30/3.0.5/libexec/bin"     # add mvn to path
-export PATH="$PATH:/usr/local/share/python/"                        # powerline
-# Work
-export UA_REPOS_PATH="/Users/maxdelgiudice/Projects/UA/web"         # Add UA web directory to path
-export ARCHFLAGS=-Wno-error=unused-command-line-argument-hard-error-in-future
-export CHEF_PATH=/Users/maxdelgiudice/Projects/UA/chef_configs
-export AIRSHIP_PATH=/Users/maxdelgiudice/Projects/UA/web/airship
-# export PIP_NO_INDEX=
-#export PIP_INDEX_URL=https://packages.prod.urbanairship.com/pulp/python/web/pip/simple/
-#export PIP_DOWNLOAD_CACHE=/tmp/pip_cache
+export PATH="$PATH:$HOME/.rvm/bin"                              # Add RVM to PATH for scripting
+export PATH="$PATH:/usr/local/Cellar/maven30/3.0.5/libexec/bin" # add mvn to path
+export PATH="$PATH:/usr/local/share/python/"                    # powerline
+export PATH="$PATH:/usr/local/bin"                              # npm path
+export PATH="$HOME/.npm-packages/bin:$PATH"
+
+# }}}
+
