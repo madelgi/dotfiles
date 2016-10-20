@@ -9,6 +9,8 @@ export ZSH=/Users/maxdelgiudice/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="mfd"
 
+# {{{ Optional oh-my-zsh settings
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -51,13 +53,16 @@ ZSH_THEME="mfd"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+
 plugins=(git)
+
+# }}}
 
 # {{{ Source content
 
 source $ZSH/oh-my-zsh.sh
 
-# function locations
+# Function locations
 fpath=(
   $fpath
   ~/.zsh/functions
@@ -140,34 +145,31 @@ setopt prompt_subst
 
 # }}}
 
-# {{{ History
+# {{{ History (\)
 
-# history file location
+# History file location
 HISTFILE=~/.zsh_history
 
 # Save a lot of history
 HISTSIZE=10000
 SAVEHIST=10000
 
-# zsh sessions append history to the end of the history file, rather than rewrite.
+# zsh sessions append history to the end of the history file, rather
+# than rewrite.
 setopt APPEND_HISTORY
-
-# add new lines to the history incrementally, rather than waiting for a zsh session to
-# end.
+# add new lines to the history incrementally, rather than waiting for a
+# zsh session to end.
 setopt INC_APPEND_HISTORY
-
 # Remove unnecessary whitespace from commands before adding to history list
 setopt HIST_REDUCE_BLANKS
-
 # Add a command's beginning timestamp and the duration to the history file
 setopt EXTENDED_HISTORY
-
 # Ignore duplicated commands in history
 setopt HIST_IGNORE_DUPS
 
 # }}}
 
-# {{{ Aliases
+# {{{ Aliases (\)
 
 # Convenient ls shortcuts
 alias ll='ls -l'
@@ -179,18 +181,12 @@ alias rd='rmdir'
 alias cd..='cd ..'
 alias ..='cd ..'
 
-
 # purty colors
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # projects
 alias site='cd ~/Projects/maxdelgiudice'
-
-# Viewing pdfs in chrome
-cpdf() {
-    open -a "Google Chrome" $1
-}
 
 # Work-related shortcuts
 alias extdocs='cd ~/Documents/extdocs && source bin/activate'
@@ -201,7 +197,7 @@ alias reggie='java -jar ~/.m2/repository/com/urbanairship/reggie/1.5-SNAPSHOT/re
 
 # }}}
 
-# {{{ Misc options
+# {{{ Misc options (\)
 
 # various misc options
 setopt interactivecomments # comments in the shell
@@ -224,11 +220,10 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 # {{{ Path options
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-export PATH="$PATH:$HOME/.rvm/bin"                              # Add RVM to PATH for scripting
-export PATH="$PATH:/usr/local/Cellar/maven30/3.0.5/libexec/bin" # add mvn to path
-export PATH="$PATH:/usr/local/share/python/"                    # powerline
-export PATH="$PATH:/usr/local/bin"                              # npm path
-export PATH="$HOME/.npm-packages/bin:$PATH"
+export PATH="$PATH:$HOME/.rvm/bin"                                  # Add RVM to PATH for scripting
+export PATH="$PATH:/usr/local/Cellar/maven30/3.0.5/libexec/bin"     # add mvn to path
+export PATH="$PATH:/usr/local/share/python/"                        # powerline
+export PATH="$PATH:/usr/local/bin"
+export PATH="$PATH:$HOME/.npm-packages/bin"                         # npm path
 
 # }}}
-
