@@ -1,0 +1,12 @@
+# Ignore Mac OS Stuff
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python gitignore
+.ropeproject/
+__pycache__/
+*.py[cod]
+env/
+build/
+*.egg
