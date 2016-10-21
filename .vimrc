@@ -30,14 +30,14 @@ Plugin 'eagletmt/neco-ghc'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'mbbill/code_complete'
 Plugin 'vim-scripts/cscope.vim'
-Plugin 'Latex-Box-Team/Latex-Box'   " Latex compiling shi
-Plugin 'junegunn/goyo.vim'          " Distraction free writing
-Plugin 'motus/pig.vim'              " Pig syntax highlighting
-Plugin 'ervandew/supertab'          " Tab completion
-Plugin 'kien/ctrlp.vim'             " Great fuzzy search
-Plugin 'jnurmine/Zenburn'
+Plugin 'Latex-Box-Team/Latex-Box'           " Latex compiling shit
+Plugin 'junegunn/goyo.vim'                  " Distraction free writing
+Plugin 'motus/pig.vim'                      " Pig syntax highlighting
+Plugin 'ervandew/supertab'                  " Tab completion
+Plugin 'kien/ctrlp.vim'                     " Great fuzzy search
+Plugin 'jnurmine/Zenburn'                   " My color scheme
 Plugin 'altercation/vim-colors-solarized'   " vim colors
-Plugin 'tpope/vim-fugitive'         " Git integration
+Plugin 'tpope/vim-fugitive'                 " Git integration
 
 " Python specific
 Plugin 'Valloric/YouCompleteMe'
@@ -108,7 +108,7 @@ augroup END
 
 "}}}
 
-"{{{Misc Settings
+"{{{ Misc Settings
 
 " Necesary  for lots of cool vim things
 set nocompatible
@@ -181,9 +181,10 @@ set nohidden
 
 " Set off the other paren
 highlight MatchParen ctermbg=4
+
 " }}}
 
-"{{{Look and Feel
+" {{{ Look and Feel
 
 " colors zenburn
 
@@ -346,8 +347,6 @@ nnoremap : ;
 " Fix email paragraphs
 nnoremap <leader>par :%s/^>$//<CR>
 
-"ly$O#{{{ "lpjjj_%A#}}}jjzajj
-
 "}}}
 
 "{{{Taglist configuration
@@ -359,6 +358,7 @@ let Tlist_Inc_Winwidth = 0
 "}}}
 
 " {{{ Templates
+
 :imap <buffer> ;; <C-O>/%%%<CR><C-O>c3l
 :nmap <buffer> ;; /%%%<CR>c3l
 

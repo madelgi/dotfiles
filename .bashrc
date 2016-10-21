@@ -99,4 +99,3 @@ ulimit -n 1000000 unlimited
 # }}}
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PATH="$PATH:$HOME/Library/Haskell/bin" # add haskell shit to path
