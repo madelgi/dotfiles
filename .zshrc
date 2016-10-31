@@ -225,6 +225,7 @@ export PATH="$PATH:/usr/local/share/python/"                        # powerline
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:$HOME/.npm-packages/bin"                         # npm path
 export PATH="$PATH:$HOME/Library/Haskell/bin"                       # add haskell shit to path
+export PATH="$PATH:$HOME/anaconda/bin"
 
 # Needs to be the last line
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
