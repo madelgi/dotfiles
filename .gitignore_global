@@ -1,3 +1,9 @@
+# General
+*.swp
+
+# Personal -- dir for local scripts n such
+bin.local/
+
 # Ignore Mac OS Stuff
 .DS_Store
 .AppleDouble
@@ -9,5 +15,27 @@ __pycache__/
 *.py[cod]
 env/
 build/
-*.egg
+*.egg*
 .tox/
+
+
+# Build system
+.gradle/
+captures/
+
+# Editor
+.idea/
+
+# NPM
+npm-debug.log
+
+# Gradle stuff
+.gradle
+/build/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+# Urban Airship
+airshipconfig.properties
+AirshipConfig.plist

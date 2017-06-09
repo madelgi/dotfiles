@@ -44,7 +44,7 @@
     untracked = cyan
 
 [core]
-    excludesfile = /Users/maxdelgiudice/.gitignore_global
+	excludesfile = /Users/maxdelgiudice/.gitignore_global
     editor = vim
     whitespace = warn
 
@@ -73,3 +73,14 @@
     helper = osxkeychain
 [rerere]
 	enabled = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[user]
+	name = Max Del Giudice
+	email = maxdelgiudice@gmail.com
+[commit]
+	template = /Users/maxdelgiudice/.stCommitMsg

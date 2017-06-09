@@ -33,21 +33,34 @@ Plugin 'vim-scripts/cscope.vim'
 Plugin 'Latex-Box-Team/Latex-Box'           " Latex compiling shit
 Plugin 'junegunn/goyo.vim'                  " Distraction free writing
 Plugin 'motus/pig.vim'                      " Pig syntax highlighting
+Plugin 'wlangstroth/vim-racket'             " Racket syntax highlighting
+Plugin 'tfnico/vim-gradle'                  " Gradle syntax highlighting
+Plugin 'kballard/vim-swift'                 " Swift
 Plugin 'ervandew/supertab'                  " Tab completion
 Plugin 'kien/ctrlp.vim'                     " Great fuzzy search
 Plugin 'jnurmine/Zenburn'                   " My color scheme
 Plugin 'altercation/vim-colors-solarized'   " vim colors
 Plugin 'tpope/vim-fugitive'                 " Git integration
 
-" Python specific
+" Clojure
+Plugin 'tpope/vim-fireplace'                " REPL integration
+Plugin 'vim-scripts/paredit.vim'            " Code editing features - balanced parens, etc
+
+" Markdown
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
+" Obj-c
+Plugin 'b4winckler/vim-objc'                " Syntax highlighting
+
+" Praat
+Plugin 'dopefishh/vim-praat'
+
+" Python
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'nvie/vim-flake8'                    " Python style checker
 Plugin 'tmhedberg/SimpylFold'               " Auto fold function defs, class defs, etc
 Plugin 'vim-scripts/indentpython.vim'       " Auto indentation
-
-" Clojure
-Plugin 'tpope/vim-fireplace'                " REPL integration
-Plugin 'vim-scripts/paredit.vim'            " Code editing features - balanced parens, etc
 
 " End vundle
 call vundle#end()
@@ -55,7 +68,9 @@ filetype plugin indent on
 
 " }}}
 
-" {{{ Syntastic
+" {{{ Plugin configs
+
+""" Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -69,6 +84,16 @@ let g:syntastic_check_on_wq = 0
 " Make syntastic passive
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+
+""" YouCompleteMe
+
+" Additional configuration
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+
+""" Ctrl-P
+
+" Ignore gitignore files
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " }}}
 
@@ -350,20 +375,31 @@ nnoremap <leader>par :%s/^>$//<CR>
 "}}}
 
 "{{{Taglist configuration
+
 let Tlist_Use_Right_Window = 1
 let Tlist_Enable_Fold_Column = 0
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Use_SingleClick = 1
 let Tlist_Inc_Winwidth = 0
+
 "}}}
 
 " {{{ Templates
 
+" Latex
 :imap <buffer> ;; <C-O>/%%%<CR><C-O>c3l
 :nmap <buffer> ;; /%%%<CR>c3l
 
 :imap <buffer> ;fo <C-O>mzfor( %%%; %%%; %%%)<CR>{ // %%%<CR>%%%<CR>}<CR><C-O>'z;;
 :imap <buffer> ;prob <C-O>mz% {{{ Problem %%%<CR>\begin{problem}{\it %%%}<CR><CR>{\sc Solution}:<CR><CR>\end{problem}<CR>% }}}<CR><C-O>'z;;
+
+" C Files
+autocmd bufnewfile *.c so ~/.vim/headers/c.txt
+autocmd bufnewfile *.c exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
+autocmd bufnewfile *.c exe "1," . 7 . "g/Created :.*/s//Created : " .strftime("%c")
+autocmd Bufwritepre,filewritepre *.c execute "normal ma"
+autocmd Bufwritepre,filewritepre *.c exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+autocmd bufwritepost,filewritepost *.c execute "normal `a"
 
 " }}}
 

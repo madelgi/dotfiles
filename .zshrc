@@ -219,15 +219,25 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 # {{{ Path options
 
-export PATH="$PATH:$HOME/.rvm/bin"                                  # Add RVM to PATH for scripting
+export PATH="$HOME/.rvm/bin:$PATH"                                  # Add RVM to PATH for scripting
 export PATH="$PATH:/usr/local/Cellar/maven30/3.0.5/libexec/bin"     # add mvn to path
 export PATH="$PATH:/usr/local/share/python/"                        # powerline
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:$HOME/.npm-packages/bin"                         # npm path
 export PATH="$PATH:$HOME/Library/Haskell/bin"                       # add haskell shit to path
 export PATH="$PATH:$HOME/anaconda/bin"
+export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"        # add adb to path
+
+# }}}
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/maxdelgiudice/.sdkman"
+[[ -s "/Users/maxdelgiudice/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/maxdelgiudice/.sdkman/bin/sdkman-init.sh"
+
+# OPAM configuration
+. /Users/maxdelgiudice/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 # Needs to be the last line
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
-# }}}
+eval $(/usr/libexec/path_helper -s)

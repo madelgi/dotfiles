@@ -99,3 +99,7 @@ ulimit -n 1000000 unlimited
 # }}}
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/maxdelgiudice/.sdkman"
+[[ -s "/Users/maxdelgiudice/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/maxdelgiudice/.sdkman/bin/sdkman-init.sh"
