@@ -13,3 +13,5 @@
 .vimrc
 .zsh
 .zshrc
+
+.oh-my-zsh/themes/mfd.zsh-theme
