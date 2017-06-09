@@ -1,0 +1,15 @@
+.bash_profile
+.bashrc
+.bin
+.common
+.configvars
+.cvsignore
+.ghci
+.gitignore_global
+.itconfig
+.skeletons
+.tmux.conf
+.vim
+.vimrc
+.zsh
+.zshrc

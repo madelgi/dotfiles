@@ -1,0 +1,6 @@
+.vim/bundle
+.netrwhist
+.configvars
+.ctags
+.ssh/*
+functions/
