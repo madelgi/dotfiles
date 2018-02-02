@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/maxdelgiudice/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -71,9 +71,6 @@ fpath=(
 
 # things i use in bash and zsh
 source ~/.common
-
-# secret variables n stuff
-source ~/.configvars
 
 # tmuxinator stuff
 source ~/.bin/tmuxinator.zsh
@@ -230,14 +227,5 @@ export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"        # add adb to
 
 # }}}
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/maxdelgiudice/.sdkman"
-[[ -s "/Users/maxdelgiudice/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/maxdelgiudice/.sdkman/bin/sdkman-init.sh"
-
-# OPAM configuration
-. /Users/maxdelgiudice/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-
 # Needs to be the last line
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
-
-eval $(/usr/libexec/path_helper -s)

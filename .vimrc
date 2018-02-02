@@ -29,7 +29,6 @@ Plugin 'eagletmt/ghcmod-vim'
 Plugin 'eagletmt/neco-ghc'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'mbbill/code_complete'
-Plugin 'vim-scripts/cscope.vim'
 Plugin 'Latex-Box-Team/Latex-Box'           " Latex compiling shit
 Plugin 'junegunn/goyo.vim'                  " Distraction free writing
 Plugin 'motus/pig.vim'                      " Pig syntax highlighting
@@ -89,6 +88,9 @@ nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 
 " Additional configuration
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+
+" Close preview window automatically
+autocmd CompleteDone * pclose
 
 """ Ctrl-P
 

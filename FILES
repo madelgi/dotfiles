@@ -5,6 +5,7 @@
 .configvars
 .cvsignore
 .ghci
+.gitconfig
 .gitignore_global
 .itconfig
 .skeletons
