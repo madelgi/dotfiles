@@ -5,7 +5,7 @@ function get_pwd() {
 
 PROMPT='
 $fg[cyan]%m: $fg[yellow]$(get_pwd)$(put_spacing)$(git_prompt_info)
-$reset_color→ '
+$reset_color→  '
 
 
 function put_spacing() {
