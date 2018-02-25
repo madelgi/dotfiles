@@ -8,7 +8,6 @@ bin
 .ghci
 .gitconfig
 .gitignore_global
-.itconfig
 .skeletons
 .tmux.conf
 .vim
