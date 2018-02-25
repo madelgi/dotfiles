@@ -44,7 +44,7 @@
     untracked = cyan
 
 [core]
-	excludesfile = /Users/maxdelgiudice/.gitignore_global
+    excludesfile = /home/max/.gitignore_global
     editor = vim
     whitespace = warn
 

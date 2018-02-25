@@ -12,5 +12,7 @@ There are some lines in the vimrc that have to do w/ vundle. To get those workin
 you have to do a few things
 
 ```
-$ git clone https://github.com/gmarik/Vundle.vim.git .vim/bundle/Vundle.vim
-
+$ git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+$ vim
+# Execute :PluginInstall in vim
+```

@@ -70,7 +70,7 @@ fpath=(
 )
 
 # tmuxinator stuff
-source ~/.bin/tmuxinator.zsh
+# source ~/.bin/tmuxinator.zsh
 
 # ros stuff
 source /opt/ros/kinetic/setup.zsh

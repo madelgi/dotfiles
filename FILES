@@ -1,17 +1,16 @@
 bin
+.skeletons
+.vim
+.zsh
 
 .bash_profile
 .bashrc
-.bin
 .configvars
 .cvsignore
 .ghci
 .gitconfig
 .gitignore_global
-.skeletons
 .tmux.conf
-.vim
 .vimrc
 .libinputconf
-.zsh
 .zshrc

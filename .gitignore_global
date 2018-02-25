@@ -35,7 +35,3 @@ npm-debug.log
 gradle-app.setting
 !gradle-wrapper.jar
 .gradletasknamecache
-
-# Urban Airship
-airshipconfig.properties
-AirshipConfig.plist
