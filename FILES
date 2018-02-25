@@ -1,7 +1,8 @@
+bin
+
 .bash_profile
 .bashrc
 .bin
-.common
 .configvars
 .cvsignore
 .ghci
@@ -12,7 +13,6 @@
 .tmux.conf
 .vim
 .vimrc
+.libinputconf
 .zsh
 .zshrc
-
-.oh-my-zsh/themes/mfd.zsh-theme

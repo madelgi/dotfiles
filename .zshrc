@@ -69,9 +69,6 @@ fpath=(
   /usr/local/share/zsh/site-functions
 )
 
-# things i use in bash and zsh
-source ~/.common
-
 # tmuxinator stuff
 source ~/.bin/tmuxinator.zsh
 
@@ -223,6 +220,7 @@ export PATH="$HOME/.rvm/bin:$PATH"                                  # Add RVM to
 export PATH="$PATH:/usr/local/Cellar/maven30/3.0.5/libexec/bin"     # add mvn to path
 export PATH="$PATH:/usr/local/share/python/"                        # powerline
 export PATH="$PATH:/usr/local/bin"
+export PATH="$PATH:$HOME/bin"                                       # Local scripts
 export PATH="$PATH:$HOME/.npm-packages/bin"                         # npm path
 export PATH="$PATH:$HOME/Library/Haskell/bin"                       # add haskell shit to path
 export PATH="$PATH:$HOME/anaconda/bin"

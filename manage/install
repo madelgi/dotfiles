@@ -27,7 +27,7 @@ for dotfile in .*.local ; do
   fi
 done
 
-for dotfile in $(./bin/file_list.sh); do
+for dotfile in $(./manage/file_list.sh); do
   dotmatrix_path="$PWD/$dotfile"
   path="$HOME/$dotfile"
 

@@ -37,7 +37,7 @@ remove_notice() {
 
 directory_warning() {
   name=$(basename $0)
-  if [[ ! "$PWD/bin/$name" -ef "$0" ]]; then
+  if [[ ! "$PWD/manage/$name" -ef "$0" ]]; then
     echo "${yellow}Please run '$name' from dotmatrix root folder${normal}"
     exit 1
   fi
