@@ -73,7 +73,7 @@ fpath=(
 # source ~/.bin/tmuxinator.zsh
 
 # ros stuff
-source /opt/ros/kinetic/setup.zsh
+#source /opt/ros/kinetic/setup.zsh
 
 # }}}
 
@@ -225,6 +225,7 @@ export PATH="$PATH:$HOME/.npm-packages/bin"                         # npm path
 export PATH="$PATH:$HOME/Library/Haskell/bin"                       # add haskell shit to path
 export PATH="$PATH:$HOME/anaconda/bin"
 export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"        # add adb to path
+export PATH="/home/max/anaconda3/bin:$PATH"                         # Anaconda
 
 # }}}
 
