@@ -185,12 +185,9 @@ alias fgrep='fgrep --color=auto'
 # projects
 alias site='cd ~/Projects/maxdelgiudice'
 
-# Work-related shortcuts
-alias extdocs='cd ~/Documents/extdocs && source bin/activate'
-alias engdocs='cd ~/Documents/docs && source bin/activate'
-alias open-eng='open -a "Google Chrome" /Users/maxdelgiudice/Documents/docs/_build/html/index.html'
-alias open-ext='open -a "Google Chrome" /Users/maxdelgiudice/Documents/extdocs/_build/html/index.html'
-alias reggie='java -jar ~/.m2/repository/com/urbanairship/reggie/1.5-SNAPSHOT/reggie-1.5-SNAPSHOT-shaded.jar'
+# Cisco VPN
+alias vpn='/opt/cisco/anyconnect/bin/vpn'
+alias vpnui='/opt/cisco/anyconnect/bin/vpnui'
 
 # }}}
 
@@ -231,3 +228,9 @@ export PATH="/home/max/anaconda3/bin:$PATH"                         # Anaconda
 
 # Needs to be the last line
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/max/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/home/max/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/max/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/max/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

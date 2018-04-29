@@ -70,7 +70,7 @@
     path = ~/.gitconfig.local
 
 [credential]
-	helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
+	helper = /usr/share/doc/git/contrib/credential/gnome-keyring/git-credential-gnome-keyring
 
 [rerere]
 	enabled = true

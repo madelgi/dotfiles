@@ -17,6 +17,7 @@ env/
 build/
 *.egg*
 .tox/
+.ipynb_checkpoints/
 
 
 # Build system
