@@ -11,6 +11,7 @@ bin
 .gitconfig
 .gitignore_global
 .tmux.conf
+.tmuxinator.zsh
 .vimrc
 .libinputconf
 .zshrc

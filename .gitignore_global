@@ -36,3 +36,11 @@ npm-debug.log
 gradle-app.setting
 !gradle-wrapper.jar
 .gradletasknamecache
+
+# Tex
+*.aux
+*.bbl
+*.blg
+*.log
+
+*.o

@@ -61,6 +61,9 @@ Plugin 'nvie/vim-flake8'                    " Python style checker
 Plugin 'tmhedberg/SimpylFold'               " Auto fold function defs, class defs, etc
 Plugin 'vim-scripts/indentpython.vim'       " Auto indentation
 
+" Javascript
+Plugin 'pangloss/vim-javascript'
+
 " End vundle
 call vundle#end()
 filetype plugin indent on

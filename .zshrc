@@ -70,7 +70,7 @@ fpath=(
 )
 
 # tmuxinator stuff
-# source ~/.bin/tmuxinator.zsh
+source ~/.tmuxinator.zsh
 
 # ros stuff
 #source /opt/ros/kinetic/setup.zsh
@@ -90,6 +90,17 @@ export LESS=FRX
 (( ${+PAGER}   )) || export PAGER='less'
 (( ${+EDITOR}  )) || export EDITOR='vim'
 export PSQL_EDITOR='vim -c"setf sql"'
+
+
+# Install Ruby Gems to ~/gems
+export GEM_HOME=$HOME/gems
+export PATH=$HOME/gems/bin:$PATH
+
+#
+export SCALA_HOME="/usr/share/scala"
+export SPARK_HOME="$HOME/spark-2.3.2-bin-hadoop2.7"
+export SPARK_LOCAL_IP="127.0.0.1"
+
 
 # }}}
 
@@ -223,6 +234,11 @@ export PATH="$PATH:$HOME/Library/Haskell/bin"                       # add haskel
 export PATH="$PATH:$HOME/anaconda/bin"
 export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"        # add adb to path
 export PATH="/home/max/anaconda3/bin:$PATH"                         # Anaconda
+export PATH="$PATH:$SPARK_HOME/bin"
+export PATH="$PATH:$SCALA_HOME/bin"
+
+# RUBY
+export PATH="$HOME/.rbenv/bin:$PATH"
 
 # }}}
 
@@ -234,3 +250,6 @@ if [ -f '/home/max/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/hom
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/max/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/max/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Start rbenv
+eval "$(rbenv init -)"

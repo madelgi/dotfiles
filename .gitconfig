@@ -70,18 +70,22 @@
     path = ~/.gitconfig.local
 
 [credential]
-	helper = /usr/share/doc/git/contrib/credential/gnome-keyring/git-credential-gnome-keyring
+	helper = /usr/share/doc/git/contrib/credential/libsecret/git-credential-libsecret
 
 [rerere]
-	enabled = true
+    enabled = true
+
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+    path =
+
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    trustExitCode = true
+
 [user]
-	name = Max Del Giudice
-	email = maxdelgiudice@gmail.com
+    name = Max Del Giudice
+    email = maxdelgiudice@gmail.com
+
 [commit]
-	template = /Users/maxdelgiudice/.stCommitMsg
+    template = /Users/maxdelgiudice/.stCommitMsg

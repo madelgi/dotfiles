@@ -56,7 +56,7 @@ alias lsd="ls -alF | grep /$"
 
 # purty colors
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'`
+alias fgrep='fgrep --color=auto'
 
 # }}}
 
@@ -91,7 +91,5 @@ fi
 
 [ ! -f "$HOME/.bashrc.local" ] || . "$HOME/.bashrc.local"
 
-# OSX is dumb
-ulimit -n 1000000 unlimited
 
 # }}}
