@@ -40,6 +40,9 @@ Plugin 'kien/ctrlp.vim'                     " Great fuzzy search
 Plugin 'jnurmine/Zenburn'                   " My color scheme
 Plugin 'altercation/vim-colors-solarized'   " vim colors
 Plugin 'tpope/vim-fugitive'                 " Git integration
+Plugin 'w0rp/ale'                           " Async linting tool
+Plugin 'SirVer/ultisnips'                   " Snippets engine
+Plugin 'honza/vim-snippets'                 " Snippets engine
 
 " Clojure
 Plugin 'tpope/vim-fireplace'                " REPL integration
@@ -99,6 +102,11 @@ autocmd CompleteDone * pclose
 
 " Ignore gitignore files
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+""" UltiSnips
+
+let g:UltiSnipsExpandTrigger="<c-j>"
+
 
 " }}}
 

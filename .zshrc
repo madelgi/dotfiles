@@ -101,6 +101,9 @@ export SCALA_HOME="/usr/share/scala"
 export SPARK_HOME="$HOME/spark-2.3.2-bin-hadoop2.7"
 export SPARK_LOCAL_IP="127.0.0.1"
 
+# OPAM
+export OPAMROOT="$HOME/opam-coq.8.9.0"
+
 
 # }}}
 
@@ -236,9 +239,8 @@ export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"        # add adb to
 export PATH="/home/max/anaconda3/bin:$PATH"                         # Anaconda
 export PATH="$PATH:$SPARK_HOME/bin"
 export PATH="$PATH:$SCALA_HOME/bin"
-
-# RUBY
-export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$PATH:/opt/public_mm/bin"                              # MetaMap
+export PATH="$PATH:/usr/local/Jena/bin"
 
 # }}}
 
@@ -251,5 +253,13 @@ if [ -f '/home/max/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/hom
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/max/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/max/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
-# Start rbenv
+# Coq
+eval `opam config env`
+
+# opam configuration
+test -r /home/max/.opam/opam-init/init.zsh && . /home/max/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+export PATH="$HOME/.rbenv/bin:$PATH"
+
+# Ruby
+export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"

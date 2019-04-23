@@ -93,3 +93,4 @@ fi
 
 
 # }}}
+eval "$(rbenv init -)"
