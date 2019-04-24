@@ -18,38 +18,39 @@ endif
 
 call vundle#begin()
 
-" Plugins
-Plugin 'gmarik/Vundle.vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'dag/vim2hs'
-Plugin 'eagletmt/ghcmod-vim'
-Plugin 'eagletmt/neco-ghc'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'mbbill/code_complete'
-Plugin 'Latex-Box-Team/Latex-Box'           " Latex compiling shit
-Plugin 'junegunn/goyo.vim'                  " Distraction free writing
-Plugin 'motus/pig.vim'                      " Pig syntax highlighting
-Plugin 'wlangstroth/vim-racket'             " Racket syntax highlighting
-Plugin 'tfnico/vim-gradle'                  " Gradle syntax highlighting
-Plugin 'kballard/vim-swift'                 " Swift
+""" Plugins
+Plugin 'gmarik/Vundle.vim'                  " Plugin manager
+Plugin 'Shougo/vimproc.vim'                 " TODO Async Utility. Not sure if still needed?
+Plugin 'easymotion/vim-easymotion'          " TODO Come back to this
 Plugin 'ervandew/supertab'                  " Tab completion
-Plugin 'kien/ctrlp.vim'                     " Great fuzzy search
+Plugin 'kien/ctrlp.vim'                     " Fuzzy search
 Plugin 'jnurmine/Zenburn'                   " My color scheme
 Plugin 'altercation/vim-colors-solarized'   " vim colors
 Plugin 'tpope/vim-fugitive'                 " Git integration
 Plugin 'w0rp/ale'                           " Async linting tool
 Plugin 'SirVer/ultisnips'                   " Snippets engine
 Plugin 'honza/vim-snippets'                 " Snippets engine
-Plugin 'Shougo/deoplete.nvim'
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
+Plugin 'Shougo/deoplete.nvim'               " Completion engine
+Plugin 'roxma/nvim-yarp'                    " Deoplete dependency
+Plugin 'roxma/vim-hug-neovim-rpc'           " Deoplete dependency
 
 " Clojure
 Plugin 'tpope/vim-fireplace'                " REPL integration
 Plugin 'vim-scripts/paredit.vim'            " Code editing features - balanced parens, etc
+
+" Gradle
+Plugin 'tfnico/vim-gradle'                  " Gradle syntax highlighting
+
+" Haskell
+Plugin 'dag/vim2hs'
+Plugin 'eagletmt/ghcmod-vim'
+Plugin 'eagletmt/neco-ghc'
+
+" Javascript
+Plugin 'pangloss/vim-javascript'
+
+" Latex
+Plugin 'Latex-Box-Team/Latex-Box'           " Latex compiling shit
 
 " Markdown
 Plugin 'godlygeek/tabular'
@@ -64,8 +65,11 @@ Plugin 'tmhedberg/SimpylFold'               " Auto fold function defs, class def
 Plugin 'vim-scripts/indentpython.vim'       " Auto indentation
 Plugin 'deoplete-plugins/deoplete-jedi'     " Completion
 
-" Javascript
-Plugin 'pangloss/vim-javascript'
+" Racket
+Plugin 'wlangstroth/vim-racket'             " Racket syntax highlighting
+
+" Scala
+Plugin 'derekwyatt/vim-scala'
 
 " End vundle
 call vundle#end()
