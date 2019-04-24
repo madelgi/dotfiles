@@ -43,6 +43,9 @@ Plugin 'tpope/vim-fugitive'                 " Git integration
 Plugin 'w0rp/ale'                           " Async linting tool
 Plugin 'SirVer/ultisnips'                   " Snippets engine
 Plugin 'honza/vim-snippets'                 " Snippets engine
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'roxma/nvim-yarp'
+Plugin 'roxma/vim-hug-neovim-rpc'
 
 " Clojure
 Plugin 'tpope/vim-fireplace'                " REPL integration
@@ -55,14 +58,11 @@ Plugin 'plasticboy/vim-markdown'
 " Obj-c
 Plugin 'b4winckler/vim-objc'                " Syntax highlighting
 
-" Praat
-Plugin 'dopefishh/vim-praat'
-
 " Python
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'nvie/vim-flake8'                    " Python style checker
 Plugin 'tmhedberg/SimpylFold'               " Auto fold function defs, class defs, etc
 Plugin 'vim-scripts/indentpython.vim'       " Auto indentation
+Plugin 'deoplete-plugins/deoplete-jedi'     " Completion
 
 " Javascript
 Plugin 'pangloss/vim-javascript'
@@ -90,14 +90,6 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 
-""" YouCompleteMe
-
-" Additional configuration
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-
-" Close preview window automatically
-autocmd CompleteDone * pclose
-
 """ Ctrl-P
 
 " Ignore gitignore files
@@ -107,6 +99,9 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 
 let g:UltiSnipsExpandTrigger="<c-j>"
 
+""" deoplete
+
+let g:deoplete#enable_at_startup = 1
 
 " }}}
 
