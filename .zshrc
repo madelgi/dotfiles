@@ -54,7 +54,7 @@ ZSH_THEME="refined"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git)
+plugins=(git docker docker-compose)
 
 # }}}
 
@@ -129,7 +129,7 @@ zstyle ':completion:*' cache-path ~/.zshcache
 
 # {{{ Bindings
 
-# just say no to zle vim mode:
+# no zle vim mode:
 bindkey -e
 
 # Bindings
@@ -156,7 +156,7 @@ setopt prompt_subst
 
 # }}}
 
-# {{{ History (\)
+# {{{ History
 
 # History file location
 HISTFILE=~/.zsh_history
@@ -180,7 +180,7 @@ setopt HIST_IGNORE_DUPS
 
 # }}}
 
-# {{{ Aliases (\)
+# {{{ Aliases
 
 # Convenient ls shortcuts
 alias ll='ls -l'
@@ -191,13 +191,11 @@ alias md='mkdir -p'
 alias rd='rmdir'
 alias cd..='cd ..'
 alias ..='cd ..'
+alias lup='netstat -tulpn | grep LISTEN'         # List in-use ports
 
-# purty colors
+# Grep colors
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
-
-# projects
-alias site='cd ~/Projects/maxdelgiudice'
 
 # Cisco VPN
 alias vpn='/opt/cisco/anyconnect/bin/vpn'
@@ -205,7 +203,7 @@ alias vpnui='/opt/cisco/anyconnect/bin/vpnui'
 
 # }}}
 
-# {{{ Misc options (\)
+# {{{ Misc options
 
 # various misc options
 setopt interactivecomments # comments in the shell
@@ -217,49 +215,73 @@ setopt extended_glob       # increase glob options
 zrcl="$HOME/.zshrc.local"
 [[ ! -a $zrcl ]] || source $zrcl
 
-# remove duplicates in $PATH
-typeset -aU path
-
-# pyenv settings
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 
 # }}}
 
 # {{{ Path options
 
-export PATH="$HOME/.rvm/bin:$PATH"                                  # Add RVM to PATH for scripting
 export PATH="$PATH:/usr/local/Cellar/maven30/3.0.5/libexec/bin"     # add mvn to path
-export PATH="$PATH:/usr/local/share/python/"                        # powerline
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:$HOME/bin"                                       # Local scripts
 export PATH="$PATH:$HOME/.npm-packages/bin"                         # npm path
 export PATH="$PATH:$HOME/Library/Haskell/bin"                       # add haskell shit to path
-export PATH="$PATH:$HOME/anaconda/bin"
+#export PATH="$PATH:$HOME/anaconda/bin"
 export PATH="$PATH:$HOME/Library/Android/sdk/platform-tools"        # add adb to path
-export PATH="/home/max/anaconda3/bin:$PATH"                         # Anaconda
 export PATH="$PATH:$SPARK_HOME/bin"
 export PATH="$PATH:$SCALA_HOME/bin"
 export PATH="$PATH:/opt/public_mm/bin"                              # MetaMap
 export PATH="$PATH:/usr/local/Jena/bin"
+export PATH="$HOME/.rbenv/bin:$PATH"
+
+# remove duplicates in $PATH
+typeset -aU path
 
 # }}}
 
-# Needs to be the last line
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+# {{{ Optional commands, depending on install
 
+### Google cloud
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/max/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/home/max/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/home/max/Downloads/google-cloud-sdk/path.zsh.inc' ]; then
+    source '/home/max/Downloads/google-cloud-sdk/path.zsh.inc';
+fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/max/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/home/max/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/home/max/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then
+    source '/home/max/Downloads/google-cloud-sdk/completion.zsh.inc';
+fi
 
-# Coq
-eval `opam config env`
+### Coq
+if which opam > /dev/null 2>&1; then
+    eval `opam config env`
+    # opam configuration
+    test -r /home/max/.opam/opam-init/init.zsh && . /home/max/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+fi
 
-# opam configuration
-test -r /home/max/.opam/opam-init/init.zsh && . /home/max/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-export PATH="$HOME/.rbenv/bin:$PATH"
+### Ruby
+if which rbenv > /dev/null 2>&1; then
+    eval "$(rbenv init -)"
+fi
 
-# Ruby
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# pyenv settings
+if which pyenv > /dev/null; then
+    eval "$(pyenv init -)";
+fi
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/max/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/max/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/max/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/max/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+#}}}
