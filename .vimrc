@@ -3,7 +3,7 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"{{{ Vundle/Plugins
+" {{{ Vundle/Plugins
 
 set nocompatible
 filetype off
@@ -23,7 +23,57 @@ Plugin 'gmarik/Vundle.vim'                  " Plugin manager
 Plugin 'Shougo/vimproc.vim'                 " TODO Async Utility. Not sure if still needed?
 Plugin 'easymotion/vim-easymotion'          " TODO Come back to this
 Plugin 'ervandew/supertab'                  " Tab completion
-Plugin 'kien/ctrlp.vim'                     " Fuzzy search
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
+" {{{ fzf settings
+  let g:statusline = 0 " disable statusline overwriting
+
+  nnoremap <silent> <leader><space> :Files<CR>
+  nnoremap <silent> <leader>a :Buffers<CR>
+  nnoremap <silent> <leader>A :Windows<CR>
+  nnoremap <silent> <leader>; :BLines<CR>
+  nnoremap <silent> <leader>o :BTags<CR>
+  nnoremap <silent> <leader>O :Tags<CR>
+  nnoremap <silent> <leader>? :History<CR>
+  nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
+  nnoremap <silent> <leader>. :AgIn
+
+  nnoremap <silent> K :call SearchWordWithAg()<CR>
+  vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
+  nnoremap <silent> <leader>gl :Commits<CR>
+  nnoremap <silent> <leader>ga :BCommits<CR>
+  nnoremap <silent> <leader>ft :Filetypes<CR>
+
+  imap <C-x><C-f> <plug>(fzf-complete-file-ag)
+  imap <C-x><C-l> <plug>(fzf-complete-line)
+
+  function! SearchWordWithAg()
+    execute 'Ag' expand('<cword>')
+  endfunction
+
+  function! SearchVisualSelectionWithAg() range
+    let old_reg = getreg('"')
+    let old_regtype = getregtype('"')
+    let old_clipboard = &clipboard
+    set clipboard&
+    normal! ""gvy
+    let selection = getreg('"')
+    call setreg('"', old_reg, old_regtype)
+    let &clipboard = old_clipboard
+    execute 'Ag' selection
+  endfunction
+
+  function! SearchWithAgInDirectory(...)
+    call fzf#vim#ag(join(a:000[1:], ' '), extend({'dir': a:1}, g:fzf#vim#default_layout))
+  endfunction
+  command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args>)
+
+  function! s:find_git_root()
+    return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+  endfunction
+
+  command! ProjectFiles execute 'Files' s:find_git_root()
+" }}}
 Plugin 'jnurmine/Zenburn'                   " My color scheme
 Plugin 'altercation/vim-colors-solarized'   " vim colors
 Plugin 'tpope/vim-fugitive'                 " Git integration
@@ -31,6 +81,9 @@ Plugin 'w0rp/ale'                           " Async linting tool
 Plugin 'SirVer/ultisnips'                   " Snippets engine
 Plugin 'honza/vim-snippets'                 " Snippets engine
 Plugin 'Shougo/deoplete.nvim'               " Completion engine
+" {{{ deoplete settings
+  let g:deoplete#enable_at_startup = 1
+" }}}
 Plugin 'roxma/nvim-yarp'                    " Deoplete dependency
 Plugin 'roxma/vim-hug-neovim-rpc'           " Deoplete dependency
 
@@ -43,6 +96,10 @@ Plugin 'tfnico/vim-gradle'                  " Gradle syntax highlighting
 
 " Haskell
 Plugin 'dag/vim2hs'
+" {{{ vim2hs settings
+  let g:haskell_conceal_wide = 1
+  let g:rct_completion_use_fri = 1
+" }}}
 Plugin 'eagletmt/ghcmod-vim'
 Plugin 'eagletmt/neco-ghc'
 
@@ -51,6 +108,10 @@ Plugin 'pangloss/vim-javascript'
 
 " Latex
 Plugin 'Latex-Box-Team/Latex-Box'           " Latex compiling shit
+" {{{ latex-box settings
+  let g:Tex_DefaultTargetFormat = "pdf"
+  let g:Tex_ViewRule_pdf = "kpdf"
+" }}}
 
 " Markdown
 Plugin 'godlygeek/tabular'
@@ -62,6 +123,9 @@ Plugin 'b4winckler/vim-objc'                " Syntax highlighting
 " Python
 Plugin 'nvie/vim-flake8'                    " Python style checker
 Plugin 'tmhedberg/SimpylFold'               " Auto fold function defs, class defs, etc
+" {{{ simplyfold settings
+  let g:SimpylFold_docstring_preview=1
+" }}}
 Plugin 'vim-scripts/indentpython.vim'       " Auto indentation
 Plugin 'deoplete-plugins/deoplete-jedi'     " Completion
 
@@ -77,39 +141,7 @@ filetype plugin indent on
 
 " }}}
 
-" {{{ Plugin configs
-
-""" Syntastic
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 0
-"let g:syntastic_check_on_wq = 0
-"
-"
-"" Make syntastic passive
-"let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-"nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
-
-""" Ctrl-P
-
-" Ignore gitignore files
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
-""" UltiSnips
-
-let g:UltiSnipsExpandTrigger="<c-j>"
-
-""" deoplete
-
-let g:deoplete#enable_at_startup = 1
-
-" }}}
-
-"{{{Auto Commands
+"{{{ Auto Commands
 
 " Automatically cd into the directory that the file is in
 autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
@@ -143,6 +175,8 @@ augroup JumpCursorOnEdit
             \ endif
 augroup END
 
+nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
+
 "}}}
 
 "{{{ Misc Settings
@@ -162,10 +196,10 @@ filetype plugin on
 syntax enable
 set grepprg=grep\ -nH\ $*
 
-" Who doesn't like autoindent?
+" Copy indent from current line to next line
 set autoindent
 
-" Spaces are better than a tab character
+" Replace tabs with spaces
 set expandtab
 set smarttab
 set shiftwidth=4
@@ -177,8 +211,8 @@ if version >= 700
    set nospell
 endif
 
-" Real men use gcc
-"compiler gcc
+" Set the compiler to gcc
+compiler gcc
 
 " Cool tab completion stuff
 set wildmenu
@@ -187,21 +221,17 @@ set wildmode=list:longest,full
 " Enable mouse support in console
 set mouse=a
 
-" Got backspace?
+" Make backspace work
 set backspace=2
 
-" Line Numbers PWN!
+" Add line numbers to files
 set number
 
-" Ignoring case is a fun trick
+" Ignore case unless string contains uppercase letters
 set ignorecase
-
-" And so is Artificial Intellegence!
 set smartcase
 
-" This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
 inoremap jj <Esc>
-
 nnoremap JJJJ <Nop>
 
 " Incremental searching is sexy
@@ -210,7 +240,7 @@ set incsearch
 " Highlight things that we find with the search
 set hlsearch
 
-" Since I use linux, I want this
+" Use + register for copy/paste
 let g:clipbrdDefaultReg = '+'
 
 " When I close a tab, remove the buffer
@@ -223,7 +253,7 @@ highlight MatchParen ctermbg=4
 
 " {{{ Look and Feel
 
-" colors zenburn
+" Use zenburn
 
 if has('gui_running')
   set background=dark
@@ -232,7 +262,7 @@ else
   colorscheme zenburn
 endif
 
-"Status line gnarliness
+" Status line
 set laststatus=2
 set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
 
@@ -300,25 +330,10 @@ endfunction
 
 "}}}
 
-"{{{ Mappings
+" {{{ Mappings
 
 " For navigating buffers
 nnoremap <silent> gn :bn<CR>
-
-" Open Url on this line with the browser \w
-map <Leader>w :call Browser ()<CR>
-
-" Open the Project Plugin <F2>
-nnoremap <silent> <F2> :Project<CR>
-
-" Open the Project Plugin
-nnoremap <silent> <Leader>pal  :Project .vimproject<CR>
-
-" TODO Mode
-nnoremap <silent> <Leader>todo :execute TodoListMode()<CR>
-
-" Open the TagList Plugin <F3>
-nnoremap <silent> <F3> :Tlist<CR>
 
 " Next Tab
 nnoremap <silent> <C-h> :tabnext<CR>
@@ -334,10 +349,6 @@ nnoremap <silent> <F8> :execute RotateColorTheme()<CR>
 
 " DOS is for fools.
 nnoremap <silent> <F9> :%s/$//g<CR>:%s// /g<CR>
-
-" Paste Mode!  Dang! <F10>
-nnoremap <silent> <F10> :call Paste_on_off()<CR>
-set pastetoggle=<F10>
 
 " Edit vimrc \ev
 nnoremap <silent> <Leader>ev :tabnew<CR>:e ~/.vimrc<CR>
@@ -362,9 +373,6 @@ nnoremap <silent> <End> a <Esc>r
 nnoremap <silent> zj o<Esc>
 nnoremap <silent> zk O<Esc>
 
-" Space will toggle folds!
-nnoremap <space> za
-
 " Search mappings: These will make it so that going to the next one in a
 " search will center on the line it's found in.
 map N Nzz
@@ -381,49 +389,8 @@ inoremap <expr> <m-;> pumvisible() ? "\<lt>c-n>" : "\<lt>c-x>\<lt>c-o>\<lt>c-n>\
 nnoremap ; :
 nnoremap : ;
 
-" Fix email paragraphs
-nnoremap <leader>par :%s/^>$//<CR>
-
-"}}}
-
-"{{{Taglist configuration
-
-let Tlist_Use_Right_Window = 1
-let Tlist_Enable_Fold_Column = 0
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_Use_SingleClick = 1
-let Tlist_Inc_Winwidth = 0
-
-"}}}
-
-" {{{ Templates
-
-" Latex
-:imap <buffer> ;; <C-O>/%%%<CR><C-O>c3l
-:nmap <buffer> ;; /%%%<CR>c3l
-
-:imap <buffer> ;fo <C-O>mzfor( %%%; %%%; %%%)<CR>{ // %%%<CR>%%%<CR>}<CR><C-O>'z;;
-:imap <buffer> ;prob <C-O>mz% {{{ Problem %%%<CR>\begin{problem}{\it %%%}<CR><CR>{\sc Solution}:<CR><CR>\end{problem}<CR>% }}}<CR><C-O>'z;;
-
-" C Files
-autocmd bufnewfile *.c so ~/.vim/headers/c.txt
-autocmd bufnewfile *.c exe "1," . 7 . "g/File Name :.*/s//File Name : " .expand("%")
-autocmd bufnewfile *.c exe "1," . 7 . "g/Created :.*/s//Created : " .strftime("%c")
-autocmd Bufwritepre,filewritepre *.c execute "normal ma"
-autocmd Bufwritepre,filewritepre *.c exe "1," . 7 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
-autocmd bufwritepost,filewritepost *.c execute "normal `a"
-
 " }}}
 
-" docstrings for folded code
-let g:SimpylFold_docstring_preview=1
-
-" enable pretty syntax stuff for haskell
-let g:haskell_conceal_wide=1
-
-let g:rct_completion_use_fri = 1
-"let g:Tex_DefaultTargetFormat = "pdf"
-let g:Tex_ViewRule_pdf = "kpdf"
 
 filetype plugin indent on
 syntax on
