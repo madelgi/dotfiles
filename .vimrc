@@ -1,105 +1,43 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " A ~*~Beautiful~*~ vimrc file
 "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " {{{ Vundle/Plugins
 
+" Turn off compatibility with vi and filetype detection (temporarily)
 set nocompatible
 filetype off
 
-" Set vundle location. This changes a bit based on whether we're in the
-" dotfiles directory or not.
-if getcwd() == '/Users/maxdelgiudice/dotfiles'
-   set rtp+=.vim/bundle/Vundle.vim
-else
-   set rtp+=~/.vim/bundle/Vundle.vim
-endif
+set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
 
 """ Plugins
+" General plugins
 Plugin 'gmarik/Vundle.vim'                  " Plugin manager
-Plugin 'Shougo/vimproc.vim'                 " TODO Async Utility. Not sure if still needed?
-Plugin 'easymotion/vim-easymotion'          " TODO Come back to this
-Plugin 'ervandew/supertab'                  " Tab completion
+Plugin 'Shougo/vimproc.vim'                 " TODO Async Utility. Potentially still needed, even w/ noevim.
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
-" {{{ fzf settings
-  let g:statusline = 0 " disable statusline overwriting
-
-  nnoremap <silent> <leader><space> :Files<CR>
-  nnoremap <silent> <leader>a :Buffers<CR>
-  nnoremap <silent> <leader>A :Windows<CR>
-  nnoremap <silent> <leader>; :BLines<CR>
-  nnoremap <silent> <leader>o :BTags<CR>
-  nnoremap <silent> <leader>O :Tags<CR>
-  nnoremap <silent> <leader>? :History<CR>
-  nnoremap <silent> <leader>/ :execute 'Ag ' . input('Ag/')<CR>
-  nnoremap <silent> <leader>. :AgIn
-
-  nnoremap <silent> K :call SearchWordWithAg()<CR>
-  vnoremap <silent> K :call SearchVisualSelectionWithAg()<CR>
-  nnoremap <silent> <leader>gl :Commits<CR>
-  nnoremap <silent> <leader>ga :BCommits<CR>
-  nnoremap <silent> <leader>ft :Filetypes<CR>
-
-  imap <C-x><C-f> <plug>(fzf-complete-file-ag)
-  imap <C-x><C-l> <plug>(fzf-complete-line)
-
-  function! SearchWordWithAg()
-    execute 'Ag' expand('<cword>')
-  endfunction
-
-  function! SearchVisualSelectionWithAg() range
-    let old_reg = getreg('"')
-    let old_regtype = getregtype('"')
-    let old_clipboard = &clipboard
-    set clipboard&
-    normal! ""gvy
-    let selection = getreg('"')
-    call setreg('"', old_reg, old_regtype)
-    let &clipboard = old_clipboard
-    execute 'Ag' selection
-  endfunction
-
-  function! SearchWithAgInDirectory(...)
-    call fzf#vim#ag(join(a:000[1:], ' '), extend({'dir': a:1}, g:fzf#vim#default_layout))
-  endfunction
-  command! -nargs=+ -complete=dir AgIn call SearchWithAgInDirectory(<f-args>)
-
-  function! s:find_git_root()
-    return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-  endfunction
-
-  command! ProjectFiles execute 'Files' s:find_git_root()
-" }}}
 Plugin 'jnurmine/Zenburn'                   " My color scheme
 Plugin 'altercation/vim-colors-solarized'   " vim colors
 Plugin 'tpope/vim-fugitive'                 " Git integration
-Plugin 'w0rp/ale'                           " Async linting tool
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'SirVer/ultisnips'                   " Snippets engine
 Plugin 'honza/vim-snippets'                 " Snippets engine
-Plugin 'Shougo/deoplete.nvim'               " Completion engine
-" {{{ deoplete settings
-  let g:deoplete#enable_at_startup = 1
-" }}}
-Plugin 'roxma/nvim-yarp'                    " Deoplete dependency
-Plugin 'roxma/vim-hug-neovim-rpc'           " Deoplete dependency
 
 " Clojure
 Plugin 'tpope/vim-fireplace'                " REPL integration
 Plugin 'vim-scripts/paredit.vim'            " Code editing features - balanced parens, etc
+
+" CSV
+Plugin 'chrisbra/csv.vim'
 
 " Gradle
 Plugin 'tfnico/vim-gradle'                  " Gradle syntax highlighting
 
 " Haskell
 Plugin 'dag/vim2hs'
-" {{{ vim2hs settings
-  let g:haskell_conceal_wide = 1
-  let g:rct_completion_use_fri = 1
-" }}}
 Plugin 'eagletmt/ghcmod-vim'
 Plugin 'eagletmt/neco-ghc'
 
@@ -107,15 +45,14 @@ Plugin 'eagletmt/neco-ghc'
 Plugin 'pangloss/vim-javascript'
 
 " Latex
-Plugin 'Latex-Box-Team/Latex-Box'           " Latex compiling shit
-" {{{ latex-box settings
-  let g:Tex_DefaultTargetFormat = "pdf"
-  let g:Tex_ViewRule_pdf = "kpdf"
-" }}}
+Plugin 'Latex-Box-Team/Latex-Box'           " Latex compiling stuff
 
 " Markdown
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+
+" nginx
+Plugin 'chr4/nginx.vim'
 
 " Obj-c
 Plugin 'b4winckler/vim-objc'                " Syntax highlighting
@@ -123,11 +60,7 @@ Plugin 'b4winckler/vim-objc'                " Syntax highlighting
 " Python
 Plugin 'nvie/vim-flake8'                    " Python style checker
 Plugin 'tmhedberg/SimpylFold'               " Auto fold function defs, class defs, etc
-" {{{ simplyfold settings
-  let g:SimpylFold_docstring_preview=1
-" }}}
 Plugin 'vim-scripts/indentpython.vim'       " Auto indentation
-Plugin 'deoplete-plugins/deoplete-jedi'     " Completion
 
 " Racket
 Plugin 'wlangstroth/vim-racket'             " Racket syntax highlighting
@@ -135,10 +68,13 @@ Plugin 'wlangstroth/vim-racket'             " Racket syntax highlighting
 " Scala
 Plugin 'derekwyatt/vim-scala'
 
+" Toml
+Plugin 'cespare/vim-toml'
+
 " End vundle
 call vundle#end()
-filetype plugin indent on
 
+filetype plugin indent on
 " }}}
 
 "{{{ Auto Commands
@@ -175,24 +111,17 @@ augroup JumpCursorOnEdit
             \ endif
 augroup END
 
-nnoremap <buffer> <F9> :exec '!python' shellescape(@%, 1)<cr>
-
 "}}}
 
 "{{{ Misc Settings
 
-" Necesary  for lots of cool vim things
-set nocompatible
-
-" This shows what you are typing as a command.  I love this!
+" Display current command in bottom of screen
 set showcmd
 
-" Folding Stuffs
+" Create folds w/ triple brace
 set foldmethod=marker
 
-" Needed for Syntax Highlighting and stuff
-filetype on
-filetype plugin on
+" Syntax highlighting
 syntax enable
 set grepprg=grep\ -nH\ $*
 
@@ -214,14 +143,11 @@ endif
 " Set the compiler to gcc
 compiler gcc
 
-" Cool tab completion stuff
+" Tab completion for commands
 set wildmenu
 set wildmode=list:longest,full
 
-" Enable mouse support in console
-set mouse=a
-
-" Make backspace work
+" Enable backspace
 set backspace=2
 
 " Add line numbers to files
@@ -231,20 +157,20 @@ set number
 set ignorecase
 set smartcase
 
-inoremap jj <Esc>
-nnoremap JJJJ <Nop>
-
-" Incremental searching is sexy
+" Search as string is composed
 set incsearch
 
-" Highlight things that we find with the search
+" Highlight search results
 set hlsearch
 
 " Use + register for copy/paste
 let g:clipbrdDefaultReg = '+'
 
-" When I close a tab, remove the buffer
+" Remove buffer after closing tab
 set nohidden
+
+" Helps jedi find anaconda environments
+let $VIRTUAL_ENV = $CONDA_PREFIX
 
 " Set off the other paren
 highlight MatchParen ctermbg=4
@@ -254,7 +180,6 @@ highlight MatchParen ctermbg=4
 " {{{ Look and Feel
 
 " Use zenburn
-
 if has('gui_running')
   set background=dark
   colorscheme solarized
@@ -265,6 +190,9 @@ endif
 " Status line
 set laststatus=2
 set statusline=%F%m%r%h%w\ (%{&ff}){%Y}\ [%l,%v][%p%%]
+
+" Insetion mode completion
+set completeopt=longest,menuone,preview
 
 " }}}
 
@@ -314,23 +242,13 @@ func! Paste_on_off()
 endfunc
 "}}}
 
-"{{{ Todo List Mode
-
-function! TodoListMode()
-   e ~/.todo.otl
-   Calendar
-   wincmd l
-   set foldlevel=1
-   tabnew ~/.notes.txt
-   tabfirst
-   " or 'norm! zMzr'
-endfunction
-
-"}}}
-
 "}}}
 
 " {{{ Mappings
+
+" Remap double j to escape, quadruple J to no-op
+inoremap jj <Esc>
+nnoremap JJJJ <Nop>
 
 " For navigating buffers
 nnoremap <silent> gn :bn<CR>
@@ -352,9 +270,6 @@ nnoremap <silent> <F9> :%s/$//g<CR>:%s// /g<CR>
 
 " Edit vimrc \ev
 nnoremap <silent> <Leader>ev :tabnew<CR>:e ~/.vimrc<CR>
-
-" C code completion
-let g:completekey = "<tab>"
 
 " Edit gvimrc \gv
 nnoremap <silent> <Leader>gv :tabnew<CR>:e ~/.gvimrc<CR>
@@ -378,19 +293,8 @@ nnoremap <silent> zk O<Esc>
 map N Nzz
 map n nzz
 
-" Testing
-set completeopt=longest,menuone,preview
-
-inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
-inoremap <expr> <c-n> pumvisible() ? "\<lt>c-n>" : "\<lt>c-n>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"
-inoremap <expr> <m-;> pumvisible() ? "\<lt>c-n>" : "\<lt>c-x>\<lt>c-o>\<lt>c-n>\<lt>c-p>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"
-
 " Swap ; and :  Convenient.
 nnoremap ; :
 nnoremap : ;
 
 " }}}
-
-
-filetype plugin indent on
-syntax on
