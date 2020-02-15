@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-function yssh() {
-    ssh mfd35@$1.zoo.cs.yale.edu
-}
