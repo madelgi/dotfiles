@@ -54,7 +54,7 @@ ZSH_THEME="refined"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git docker docker-compose)
+plugins=(git docker docker-compose tmuxinator)
 
 # }}}
 
@@ -104,6 +104,11 @@ export SPARK_LOCAL_IP="127.0.0.1"
 # OPAM
 export OPAMROOT="$HOME/opam-coq.8.9.0"
 
+# Pip embeddings library
+export EMBEDDINGS_ROOT="/data/biowordvec"
+
+# Private tokens, etc
+source "$HOME/private.env"
 
 # }}}
 
@@ -124,6 +129,11 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zshcache
+
+# Pasting
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 
 # }}}
 
@@ -232,6 +242,7 @@ export PATH="$PATH:$SCALA_HOME/bin"
 export PATH="$PATH:/opt/public_mm/bin"                              # MetaMap
 export PATH="$PATH:/usr/local/Jena/bin"
 export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # remove duplicates in $PATH
 typeset -aU path
