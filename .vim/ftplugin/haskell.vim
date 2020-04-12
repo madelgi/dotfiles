@@ -1,8 +1,7 @@
-setlocal omnifunc=necoghc#omnifunc
+" {{{ hdevtools options
 
-" {{{ ghcmod-vim options
-
-nnoremap <F4> :GhcModType<CR>
-nnoremap <F5> :GhcModCheck<CR>
+nnoremap <buffer> <F1> :HdevtoolsType<CR>
+nnoremap <buffer> <silent> <F2> :HdevtoolsInfo<CR>
+nnoremap <buffer> <silent> <F3> :HdevtoolsClear<CR>
 
 " }}}

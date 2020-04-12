@@ -37,9 +37,7 @@ Plugin 'chrisbra/csv.vim'
 Plugin 'tfnico/vim-gradle'                  " Gradle syntax highlighting
 
 " Haskell
-Plugin 'dag/vim2hs'
-Plugin 'eagletmt/ghcmod-vim'
-Plugin 'eagletmt/neco-ghc'
+Plugin 'bitc/vim-hdevtools'
 
 " Javascript
 Plugin 'pangloss/vim-javascript'
@@ -61,6 +59,7 @@ Plugin 'b4winckler/vim-objc'                " Syntax highlighting
 Plugin 'nvie/vim-flake8'                    " Python style checker
 Plugin 'tmhedberg/SimpylFold'               " Auto fold function defs, class defs, etc
 Plugin 'vim-scripts/indentpython.vim'       " Auto indentation
+Plugin 'tweekmonster/django-plus.vim'       " Django highlighting
 
 " Racket
 Plugin 'wlangstroth/vim-racket'             " Racket syntax highlighting
@@ -83,7 +82,7 @@ filetype plugin indent on
 autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 
 " Remove any trailing whitespace that is in the file
-autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+" autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 " Restore cursor position to where it was before
 augroup JumpCursorOnEdit
@@ -114,6 +113,9 @@ augroup END
 "}}}
 
 "{{{ Misc Settings
+
+" Mouse support
+set mouse=a
 
 " Display current command in bottom of screen
 set showcmd
@@ -170,7 +172,7 @@ let g:clipbrdDefaultReg = '+'
 set nohidden
 
 " Helps jedi find anaconda environments
-let $VIRTUAL_ENV = $CONDA_PREFIX
+" let $VIRTUAL_ENV = $CONDA_PREFIX
 
 " Set off the other paren
 highlight MatchParen ctermbg=4
@@ -296,5 +298,13 @@ map n nzz
 " Swap ; and :  Convenient.
 nnoremap ; :
 nnoremap : ;
+
+" }}}
+
+" {{{ Fixes (should find actual reason why these commands are needed
+
+" In python environments, css evaluates as python?
+au BufRead,BufNewFile *.css set filetype=css
+au BufRead,BufNewFile *.ejs set filetype=html
 
 " }}}
