@@ -71,6 +71,9 @@ Plugin 'derekwyatt/vim-scala'
 " Toml
 Plugin 'cespare/vim-toml'
 
+" Cypher
+Plugin 'neo4j-contrib/cypher-vim-syntax'
+
 " End vundle
 call vundle#end()
 
@@ -170,7 +173,7 @@ let g:clipbrdDefaultReg = '+'
 set nohidden
 
 " Helps jedi find anaconda environments
-let $VIRTUAL_ENV = $CONDA_PREFIX
+" let $VIRTUAL_ENV = $CONDA_PREFIX
 
 " Set off the other paren
 highlight MatchParen ctermbg=4
