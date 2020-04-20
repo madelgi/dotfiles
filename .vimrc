@@ -23,8 +23,8 @@ Plugin 'jnurmine/Zenburn'                   " My color scheme
 Plugin 'altercation/vim-colors-solarized'   " vim colors
 Plugin 'tpope/vim-fugitive'                 " Git integration
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-Plugin 'SirVer/ultisnips'                   " Snippets engine
 Plugin 'honza/vim-snippets'                 " Snippets engine
+" Plugin 'SirVer/ultisnips'                   " Snippets engine
 
 " Clojure
 Plugin 'tpope/vim-fireplace'                " REPL integration
@@ -36,10 +36,8 @@ Plugin 'chrisbra/csv.vim'
 " Gradle
 Plugin 'tfnico/vim-gradle'                  " Gradle syntax highlighting
 
-" Haskell
-Plugin 'dag/vim2hs'
-Plugin 'eagletmt/ghcmod-vim'
-Plugin 'eagletmt/neco-ghc'
+" Haskell syntax 
+Plugin 'neovimhaskell/haskell-vim'
 
 " Javascript
 Plugin 'pangloss/vim-javascript'
@@ -61,6 +59,7 @@ Plugin 'b4winckler/vim-objc'                " Syntax highlighting
 Plugin 'nvie/vim-flake8'                    " Python style checker
 Plugin 'tmhedberg/SimpylFold'               " Auto fold function defs, class defs, etc
 Plugin 'vim-scripts/indentpython.vim'       " Auto indentation
+Plugin 'tweekmonster/django-plus.vim'       " Django highlighting
 
 " Racket
 Plugin 'wlangstroth/vim-racket'             " Racket syntax highlighting
@@ -86,7 +85,7 @@ filetype plugin indent on
 autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 
 " Remove any trailing whitespace that is in the file
-autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+" autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 " Restore cursor position to where it was before
 augroup JumpCursorOnEdit
@@ -117,6 +116,9 @@ augroup END
 "}}}
 
 "{{{ Misc Settings
+
+" Mouse support
+set mouse=a
 
 " Display current command in bottom of screen
 set showcmd
@@ -299,5 +301,13 @@ map n nzz
 " Swap ; and :  Convenient.
 nnoremap ; :
 nnoremap : ;
+
+" }}}
+
+" {{{ Fixes (should find actual reason why these commands are needed
+
+" In python environments, css evaluates as python?
+au BufRead,BufNewFile *.css set filetype=css
+au BufRead,BufNewFile *.ejs set filetype=html
 
 " }}}

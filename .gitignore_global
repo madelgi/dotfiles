@@ -30,6 +30,9 @@ captures/
 # NPM
 npm-debug.log
 
+# Dist 
+dist/
+
 # Gradle stuff
 .gradle
 /build/
@@ -44,3 +47,4 @@ gradle-app.setting
 *.log
 
 *.o
+.vim

@@ -201,7 +201,8 @@ alias md='mkdir -p'
 alias rd='rmdir'
 alias cd..='cd ..'
 alias ..='cd ..'
-alias lup='netstat -tulpn | grep LISTEN'         # List in-use ports
+alias lup='netstat -tulpn | grep LISTEN'        # List in-use ports
+alias vim=nvim                                  # Always use neovim
 
 # Grep colors
 alias grep='grep --color=auto'
@@ -243,6 +244,7 @@ export PATH="$PATH:/opt/public_mm/bin"                              # MetaMap
 export PATH="$PATH:/usr/local/Jena/bin"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$PATH:/opt/ghc/8.6.5/bin/"
 
 # remove duplicates in $PATH
 typeset -aU path
