@@ -30,6 +30,9 @@ captures/
 # NPM
 npm-debug.log
 
+# Dist 
+dist/
+
 # Gradle stuff
 .gradle
 /build/

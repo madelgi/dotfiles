@@ -23,8 +23,8 @@ Plugin 'jnurmine/Zenburn'                   " My color scheme
 Plugin 'altercation/vim-colors-solarized'   " vim colors
 Plugin 'tpope/vim-fugitive'                 " Git integration
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-Plugin 'SirVer/ultisnips'                   " Snippets engine
 Plugin 'honza/vim-snippets'                 " Snippets engine
+" Plugin 'SirVer/ultisnips'                   " Snippets engine
 
 " Clojure
 Plugin 'tpope/vim-fireplace'                " REPL integration
@@ -36,8 +36,8 @@ Plugin 'chrisbra/csv.vim'
 " Gradle
 Plugin 'tfnico/vim-gradle'                  " Gradle syntax highlighting
 
-" Haskell
-Plugin 'bitc/vim-hdevtools'
+" Haskell syntax 
+Plugin 'neovimhaskell/haskell-vim'
 
 " Javascript
 Plugin 'pangloss/vim-javascript'
