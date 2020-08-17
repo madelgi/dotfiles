@@ -36,11 +36,11 @@ Plugin 'chrisbra/csv.vim'
 " Gradle
 Plugin 'tfnico/vim-gradle'                  " Gradle syntax highlighting
 
-" Haskell syntax 
+" Haskell syntax
 Plugin 'neovimhaskell/haskell-vim'
 
 " Javascript
-Plugin 'pangloss/vim-javascript'
+" Plugin 'pangloss/vim-javascript'
 
 " Latex
 Plugin 'Latex-Box-Team/Latex-Box'           " Latex compiling stuff
@@ -73,6 +73,9 @@ Plugin 'cespare/vim-toml'
 " Cypher
 Plugin 'neo4j-contrib/cypher-vim-syntax'
 
+" Cloudformation
+Plugin 'NLKNguyen/cloudformation-syntax.vim'
+
 " End vundle
 call vundle#end()
 
@@ -85,7 +88,7 @@ filetype plugin indent on
 autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 
 " Remove any trailing whitespace that is in the file
-" autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
 
 " Restore cursor position to where it was before
 augroup JumpCursorOnEdit
@@ -309,5 +312,8 @@ nnoremap : ;
 " In python environments, css evaluates as python?
 au BufRead,BufNewFile *.css set filetype=css
 au BufRead,BufNewFile *.ejs set filetype=html
+" Autocomplete issue with tsserver
+" au BufNewFile,BufRead *.ts set filetype=javascript
+" au BufNewFile,BufRead *.tsx set filetype=javascript
 
 " }}}

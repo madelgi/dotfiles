@@ -26,11 +26,12 @@ captures/
 
 # Editor
 .idea/
+*.iml
 
 # NPM
 npm-debug.log
 
-# Dist 
+# Dist
 dist/
 
 # Gradle stuff
@@ -48,3 +49,10 @@ gradle-app.setting
 
 *.o
 # .vim
+
+# Java
+.project
+.classpath
+
+# Node
+node_modules
