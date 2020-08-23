@@ -96,7 +96,7 @@ export PSQL_EDITOR='vim -c"setf sql"'
 export GEM_HOME=$HOME/gems
 export PATH=$HOME/gems/bin:$PATH
 
-#
+# Scala and spark
 export SCALA_HOME="/usr/share/scala"
 export SPARK_HOME="$HOME/spark-2.3.2-bin-hadoop2.7"
 export SPARK_LOCAL_IP="127.0.0.1"
@@ -109,6 +109,9 @@ export EMBEDDINGS_ROOT="/data/biowordvec"
 
 # Private tokens, etc
 if [ -f "$HOME/.env.local" ]; then source "$HOME/.env.local"; fi
+
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
 
 # }}}
 
@@ -245,6 +248,7 @@ export PATH="$PATH:/usr/local/Jena/bin"
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:/opt/ghc/8.6.5/bin/"
+export PATH="$PYENV_ROOT/bin:$PATH"
 
 # remove duplicates in $PATH
 typeset -aU path
