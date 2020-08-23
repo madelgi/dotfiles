@@ -253,22 +253,11 @@ typeset -aU path
 
 # {{{ Optional commands, depending on install
 
-### Google cloud
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/max/Downloads/google-cloud-sdk/path.zsh.inc' ]; then
-    source '/home/max/Downloads/google-cloud-sdk/path.zsh.inc';
-fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/home/max/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then
-    source '/home/max/Downloads/google-cloud-sdk/completion.zsh.inc';
-fi
-
 ### Coq
 if which opam > /dev/null 2>&1; then
     eval `opam config env`
     # opam configuration
-    test -r /home/max/.opam/opam-init/init.zsh && . /home/max/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+    test -r $HOME/.opam/opam-init/init.zsh && . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 fi
 
 ### Ruby
@@ -281,27 +270,36 @@ if which pyenv > /dev/null; then
     eval "$(pyenv init -)";
 fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/max/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/max/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/max/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/max/miniconda3/bin:$PATH"
-    fi
+# Conda initialization
+conda_dir=""
+if [ -d "$HOME/anaconda3" ]; then
+    conda_dir="anaconda3"
+elif [ -d "$HOME/miniconda3" ]; then
+    conda_dir="miniconda3"
 fi
-unset __conda_setup
-# <<< conda initialize <<<
 
-#}}}
+if [ ! -z "$conda_dir" ]; then
+    __conda_setup="$("$HOME/$conda_dir/bin/conda" 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "$HOME/$conda_dir/etc/profile.d/conda.sh" ]; then
+            . "$HOME/$conda_dir/etc/profile.d/conda.sh"
+        else
+            export PATH="$HOME/$conda_dir/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+fi
 
+# If fzf is installed, enable
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/home/max/google-cloud-sdk/path.zsh.inc' ]; then . '/home/max/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/home/max/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/max/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+
+#}}}
+
