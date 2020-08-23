@@ -21,8 +21,9 @@ rm Miniconda3-latest-Linux-x86_64.sh
 # Oh My Zsh
 sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 
-# Vundle
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
 # Node
 curl -sL install-node.now.sh/lts | sudo bash
+
+
+# Install vim plugins
+vim +PlugInstall +qall

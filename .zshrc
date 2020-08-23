@@ -108,7 +108,7 @@ export OPAMROOT="$HOME/opam-coq.8.9.0"
 export EMBEDDINGS_ROOT="/data/biowordvec"
 
 # Private tokens, etc
-if [ -f "$HOME/private.env" ]; then source "$HOME/private.env"; fi
+if [ -f "$HOME/.env.local" ]; then source "$HOME/.env.local"; fi
 
 # }}}
 

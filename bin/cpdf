@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-# Viewing pdfs in chrome
-function cpdf() {
-    open -a "Google Chrome" $1
-}

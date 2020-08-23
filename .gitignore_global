@@ -18,6 +18,7 @@ build/
 *.egg*
 .tox/
 .ipynb_checkpoints/
+*.pyc
 
 
 # Build system
@@ -47,8 +48,8 @@ gradle-app.setting
 *.blg
 *.log
 
+# Compiled
 *.o
-# .vim
 
 # Java
 .project

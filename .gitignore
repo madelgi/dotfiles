@@ -1,7 +1,8 @@
-.vim/bundle
+.vim/plugged
 .netrwhist
 .configvars
 .ctags
 .ssh/*
 functions/
 bin/
+

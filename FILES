@@ -1,12 +1,5 @@
-bin
-.skeletons
-.vim
-.zsh
-
 .bash_profile
 .bashrc
-.configvars
-.cvsignore
 .ghci
 .gitconfig
 .gitignore_global
@@ -15,3 +8,8 @@ bin
 .vimrc
 .libinputconf
 .zshrc
+
+.vim
+.zsh
+
+.config/nvim

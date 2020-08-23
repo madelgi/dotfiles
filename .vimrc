@@ -7,77 +7,74 @@
 
 " Turn off compatibility with vi and filetype detection (temporarily)
 set nocompatible
-filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
 """ Plugins
 " General plugins
-Plugin 'gmarik/Vundle.vim'                  " Plugin manager
-Plugin 'Shougo/vimproc.vim'                 " TODO Async Utility. Potentially still needed, even w/ noevim.
-Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plugin 'junegunn/fzf.vim'
-Plugin 'jnurmine/Zenburn'                   " My color scheme
-Plugin 'altercation/vim-colors-solarized'   " vim colors
-Plugin 'tpope/vim-fugitive'                 " Git integration
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-Plugin 'honza/vim-snippets'                 " Snippets engine
-" Plugin 'SirVer/ultisnips'                   " Snippets engine
+Plug 'gmarik/Vundle.vim'                  " Plug manager
+Plug 'Shougo/vimproc.vim'                 " TODO Async Utility. Potentially still needed, even w/ noevim.
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'jnurmine/Zenburn'                   " My color scheme
+Plug 'altercation/vim-colors-solarized'   " vim colors
+Plug 'tpope/vim-fugitive'                 " Git integration
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'honza/vim-snippets'                 " Snippets engine
+" Plug 'SirVer/ultisnips'                   " Snippets engine
 
 " Clojure
-Plugin 'tpope/vim-fireplace'                " REPL integration
-Plugin 'vim-scripts/paredit.vim'            " Code editing features - balanced parens, etc
+Plug 'tpope/vim-fireplace'                " REPL integration
+Plug 'vim-scripts/paredit.vim'            " Code editing features - balanced parens, etc
 
 " CSV
-Plugin 'chrisbra/csv.vim'
+Plug 'chrisbra/csv.vim'
 
 " Gradle
-Plugin 'tfnico/vim-gradle'                  " Gradle syntax highlighting
+Plug 'tfnico/vim-gradle'                  " Gradle syntax highlighting
 
 " Haskell syntax
-Plugin 'neovimhaskell/haskell-vim'
+Plug 'neovimhaskell/haskell-vim'
 
 " Javascript
-" Plugin 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 
 " Latex
-Plugin 'Latex-Box-Team/Latex-Box'           " Latex compiling stuff
+Plug 'Latex-Box-Team/Latex-Box'           " Latex compiling stuff
 
 " Markdown
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 " nginx
-Plugin 'chr4/nginx.vim'
+Plug 'chr4/nginx.vim'
 
 " Obj-c
-Plugin 'b4winckler/vim-objc'                " Syntax highlighting
+Plug 'b4winckler/vim-objc'                " Syntax highlighting
 
 " Python
-Plugin 'nvie/vim-flake8'                    " Python style checker
-Plugin 'tmhedberg/SimpylFold'               " Auto fold function defs, class defs, etc
-Plugin 'vim-scripts/indentpython.vim'       " Auto indentation
-Plugin 'tweekmonster/django-plus.vim'       " Django highlighting
+Plug 'nvie/vim-flake8'                    " Python style checker
+Plug 'tmhedberg/SimpylFold'               " Auto fold function defs, class defs, etc
+Plug 'vim-scripts/indentpython.vim'       " Auto indentation
+Plug 'tweekmonster/django-plus.vim'       " Django highlighting
 
 " Racket
-Plugin 'wlangstroth/vim-racket'             " Racket syntax highlighting
+Plug 'wlangstroth/vim-racket'             " Racket syntax highlighting
 
 " Scala
-Plugin 'derekwyatt/vim-scala'
+Plug 'derekwyatt/vim-scala'
 
 " Toml
-Plugin 'cespare/vim-toml'
+Plug 'cespare/vim-toml'
 
 " Cypher
-Plugin 'neo4j-contrib/cypher-vim-syntax'
+Plug 'neo4j-contrib/cypher-vim-syntax'
 
 " Cloudformation
-Plugin 'NLKNguyen/cloudformation-syntax.vim'
+Plug 'NLKNguyen/cloudformation-syntax.vim'
 
 " End vundle
-call vundle#end()
+call plug#end()
 
 filetype plugin indent on
 " }}}
