@@ -26,6 +26,5 @@
     }
   },
   "java.errors.incompleteClasspath.severity": "ignore",
-  "tsserver.log": "normal",
-  "python.jediEnabled": false
+  "tsserver.log": "normal"
 }
