@@ -6,7 +6,7 @@
 sudo apt-get install zsh
 
 # Python packages
-sudo apt-get install python-dev python-pip python3-dev python3-pip
+# sudo apt-get install python-dev python-pip python3-dev python3-pip
 
 # Neovim
 sudo add-apt-repository ppa:neovim-ppa/stable
@@ -25,4 +25,4 @@ sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O 
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 # Node
-curl -sL install-node.now.sh/lts | bash
+curl -sL install-node.now.sh/lts | sudo bash
