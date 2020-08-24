@@ -54,7 +54,7 @@ ZSH_THEME="refined"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git docker docker-compose tmuxinator)
+plugins=(aws docker docker-compose git python tmuxinator)
 
 # }}}
 
