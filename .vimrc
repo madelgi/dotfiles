@@ -33,11 +33,18 @@ Plug 'chrisbra/csv.vim'
 " Gradle
 Plug 'tfnico/vim-gradle'                  " Gradle syntax highlighting
 
+" GraphQL
+Plug 'jparise/vim-graphql'
+
 " Haskell syntax
 Plug 'neovimhaskell/haskell-vim'
 
-" Javascript
-" Plug 'pangloss/vim-javascript'
+" Javascript/Typescript
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+"Plug 'MaxMEllon/vim-jsx-pretty'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
 
 " Latex
 Plug 'Latex-Box-Team/Latex-Box'           " Latex compiling stuff

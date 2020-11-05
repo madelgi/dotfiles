@@ -1,9 +1,6 @@
 # General
 *.swp
 
-# Personal -- dir for local scripts n such
-bin.local/
-
 # Ignore Mac OS Stuff
 .DS_Store
 .AppleDouble
@@ -19,6 +16,8 @@ build/
 .tox/
 .ipynb_checkpoints/
 *.pyc
+.venv
+*.db  # sqlite
 
 
 # Build system
@@ -57,3 +56,10 @@ gradle-app.setting
 
 # Node
 node_modules
+
+# General
+*.local
+
+# Dask
+dask-worker-space
+

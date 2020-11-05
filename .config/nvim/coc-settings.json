@@ -27,6 +27,9 @@
   },
   "java.errors.incompleteClasspath.severity": "ignore",
   "tsserver.log": "normal",
+
   "python.linting.flake8Enabled": true,
-  "python.linting.pylintEnabled": true
+  "python.linting.pylintEnabled": true,
+
+  "java.home": "/usr/lib/jvm/java-1.11.0-openjdk-amd64"
 }
